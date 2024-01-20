@@ -19,6 +19,14 @@ export default function Profile() {
       precautions: "these are the precatuions",
       interests: "these are the interests of the dog",
     },
+    {
+      id: 1,
+      name: "meow",
+      type: "cat",
+      breed: "breed 1",
+      precautions: "these are the precatuions for cat",
+      interests: "these are the interests of the cat",
+    },
   ];
   const loaderData = useLoaderData();
 
@@ -33,8 +41,8 @@ export default function Profile() {
       <Link to="/add-pet" id="add-pet">Add Pet</Link>
       <div className="pets">
         <h1>Your Pets</h1>
-        {pets.map(pet => (
-          <PetCard key={pet.id} name={pet.name} type={pet.type} breed={pet.breed} />
+        {pets.map(({id, name, type, breed}) => (
+            <PetCard key={id} id={id} name={name} type={type} breed={breed} />
         ))}
       </div>
 

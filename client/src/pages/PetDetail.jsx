@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
 export async function loader() {
   return {
@@ -11,14 +11,34 @@ export async function loader() {
     age: 2,
     interests: "These are the interests of the pet",
     precautions: "These are the precautions that need to be taken care of",
+    ownerId: 1,
   }
 }
 
 export default function PetDetail() {
   const petData = useLoaderData();
+  const user = {
+    name: "some user", id: 1
+  }
 
   return (
     <div className="bg-white p-6 rounded-md shadow-md">
+      {user.id === petData.ownerId && (
+        <div className="mb-4">
+        <Link
+          to="#"
+          className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md mr-2"
+        >
+          Update Details
+        </Link>
+        <Link
+          to="#"
+          className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md"
+        >
+          Open For Borrow
+        </Link>
+      </div>
+      )}
       <div className="mb-4">
         <span className="font-bold">Profile:</span> {petData.profile}
       </div>
