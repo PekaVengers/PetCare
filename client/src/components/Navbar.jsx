@@ -9,6 +9,7 @@ export default function Navbar() {
           <NavLink to="/about">About</NavLink>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/register">Register</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
         </div>
       </div>
     </nav>

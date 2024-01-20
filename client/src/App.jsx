@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Register, {action as registerAction} from './pages/Register';
 import Login, {action as loginAction} from './pages/Login';
+import Profile, {loader as profileLoader} from './pages/Profile';
+import AddPet, {action as addPetAction} from './pages/AddPet';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,16 @@ const router = createBrowserRouter([
         action: loginAction,
         path: "login",
         element: <Login />
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+        loader: profileLoader
+      },
+      {
+        action: addPetAction,
+        path: "add-pet",
+        element: <AddPet />,
       },
     ]
   }
