@@ -28,7 +28,7 @@ export default function BorrowList() {
       <div className="pets">
         {
           pets.map(({ id, name, type, from, to }) => (
-            <BorrowCard key={id} name={name} type={type} from={from} to={to} />
+            <BorrowCard key={id} id={id} name={name} type={type} from={from} to={to} />
           ))
         }
       </div>
