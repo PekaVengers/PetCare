@@ -14,7 +14,7 @@ export async function action({params, request}) {
 
 export default function Register() {
   return (
-    <div className="h-screen bg-red-600 bg-no-repeat bg-cover bg-center flex justify-center items-center border-2 border-black" style={{background: `url(${bgImage})`}}>
+    <div className="w-full h-screen bg-no-repeat bg-cover bg-center flex justify-center items-center border-2 border-black" style={{background: `url(${bgImage})`}}>
       <Form method="POST" className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md bg-gray-700">
         <input required className="mb-4 w-full p-2 border border-gray-300 rounded-md" type="text" name="name" placeholder="Name"/>
         <input required className="mb-4 w-full p-2 border border-gray-300 rounded-md" type="email" name="email" placeholder="Email"/>
