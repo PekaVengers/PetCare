@@ -21,21 +21,46 @@ export default function BorrowCard({id, name, type, breed, from, to }) {
   }, [navigation.state, actionData])
 
   return (
-    <div>
-      <div id="name">Name - {name}</div>
-      <div id="type">Type - {type}</div>
-      <div id="breed">Breed - {breed}</div>
-      <div id="from">From - {from}</div>
-      <div id="to">To - {to}</div>
-      {!showBorrowForm && <button onClick={() => setShowBorrowForm(true)}>Request for borrow</button>}
-      { showBorrowForm && 
-        <Form action="/pets" method="POST">
+    <div className="border p-4 my-4 rounded-md bg-white shadow-md">
+      <div className="mb-2">Name - {name}</div>
+      <div className="mb-2">Type - {type}</div>
+      <div className="mb-2">Breed - {breed}</div>
+      <div className="mb-2">From - {from}</div>
+      <div className="mb-2">To - {to}</div>
+      {!showBorrowForm && (
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          onClick={() => setShowBorrowForm(true)}
+        >
+          Request for borrow
+        </button>
+      )}
+      {showBorrowForm && (
+        <Form action="/pets" method="POST" className="mt-4">
           <input type="hidden" name="pet-id" value={id} />
-          <textarea name="borrow-message" id="" cols="30" rows="10"></textarea>
-          <button type="submit">Apply</button>
-          <button onClick={() => setShowBorrowForm(false)}>Cancel</button>
+          <textarea
+            name="borrow-message"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            cols="30"
+            rows="10"
+            placeholder="Enter your borrow message"
+          ></textarea>
+          <div className="mt-2">
+            <button
+              type="submit"
+              className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
+            >
+              Apply
+            </button>
+            <button
+              onClick={() => setShowBorrowForm(false)}
+              className="bg-red-500 text-white px-4 py-2 rounded-md"
+            >
+              Cancel
+            </button>
+          </div>
         </Form>
-      }
+      )}
     </div>
   );
 }
