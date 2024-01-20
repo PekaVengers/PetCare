@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom"
 import PetCard from "../components/PetCard";
+import AddPetButton from "../components/pet_buttons/AddPetButton";
 
 export async function loader() {
   return {
@@ -40,13 +41,7 @@ export default function Profile() {
         <div id="user-location">Location - {loaderData.location}</div>
       </div>
 
-      <Link
-        to="/add-pet"
-        id="add-pet"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md inline-block mb-4"
-      >
-        Add Pet
-      </Link>
+      <AddPetButton />
 
       <div className="pets">
         <h1 className="text-2xl font-bold mb-4">Your Pets</h1>

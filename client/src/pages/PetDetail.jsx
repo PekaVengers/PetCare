@@ -1,4 +1,7 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { useLoaderData } from "react-router-dom"
+import OpenPetButton from "../components/pet_buttons/OpenPetButton";
+import DeletePetButton from "../components/pet_buttons/DeletePetButton";
+import UpdatePetButton from "../components/pet_buttons/UpdatePetButton";
 
 export async function loader() {
   return {
@@ -25,19 +28,10 @@ export default function PetDetail() {
     <div className="bg-white p-6 rounded-md shadow-md">
       {user.id === petData.ownerId && (
         <div className="mb-4">
-        <Link
-          to="#"
-          className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md mr-2"
-        >
-          Update Details
-        </Link>
-        <Link
-          to="#"
-          className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md"
-        >
-          Open For Borrow
-        </Link>
-      </div>
+          <UpdatePetButton />
+          <OpenPetButton />
+          <DeletePetButton />
+        </div>
       )}
       <div className="mb-4">
         <span className="font-bold">Profile:</span> {petData.profile}

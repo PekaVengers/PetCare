@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import OpenPetButton from "./pet_buttons/OpenPetButton";
+import DeletePetButton from "./pet_buttons/DeletePetButton";
 
 export default function PetCard({ id, name, type, breed }) {
   console.log("Petcard rendered");
@@ -17,12 +19,8 @@ export default function PetCard({ id, name, type, breed }) {
         </div>
       </Link>
       <div className="flex justify-between">
-        <button className="bg-red-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-red-700">
-          Delete
-        </button>
-        <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700">
-          Open To Borrow
-        </button>
+        <DeletePetButton />
+        <OpenPetButton />
       </div>
     </div>
   )
