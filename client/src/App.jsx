@@ -7,6 +7,7 @@ import Login, {action as loginAction} from './pages/Login';
 import Profile, {loader as profileLoader} from './pages/Profile';
 import AddPet, {action as addPetAction} from './pages/AddPet';
 import BorrowList from './pages/BorrowList';
+import {action as borrowAction} from "./components/BorrowCard";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
         element: <AddPet />,
       },
       {
+        action: borrowAction,
         path: "pets",
         element: <BorrowList />,
       },
