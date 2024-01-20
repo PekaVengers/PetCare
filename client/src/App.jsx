@@ -6,6 +6,7 @@ import Register, {action as registerAction} from './pages/Register';
 import Login, {action as loginAction} from './pages/Login';
 import Profile, {loader as profileLoader} from './pages/Profile';
 import AddPet, {action as addPetAction} from './pages/AddPet';
+import BorrowList from './pages/BorrowList';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         action: addPetAction,
         path: "add-pet",
         element: <AddPet />,
+      },
+      {
+        path: "pets",
+        element: <BorrowList />,
       },
     ]
   }
