@@ -6,7 +6,8 @@ const userModel = require("../models/userModel");
 
 // AUTHENTICATE USER -
 exports.isAuthUser = AsynErr(async (req, res, next) => {
-  const { token } = req.cookies;
+  const { token } = req.headers.accessToken;
+  
   if (!token) {
     return next(new ErrorHandler("Please login to access", 401));
   }
