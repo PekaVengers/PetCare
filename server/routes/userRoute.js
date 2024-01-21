@@ -6,7 +6,6 @@ const {
   logoutUser,
 } = require("../controllers/userController");
 const router = express.Router();
-const { isAuthUser, authorizeRoles } = require("../middlewares/auth");
 
 // USER -
 router.route("/register").post(registerUser);

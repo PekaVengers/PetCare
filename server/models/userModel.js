@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
         "Please use a strong password with atleast one uppercase letter, a special character, and a number",
       ],
       select: false,
-    },
+    },  
 
     role: {
       type: String,

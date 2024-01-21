@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const errorMiddleware = require("./middlewares/error");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
 // CONFIG -
 if (process.env.NODE_ENV !== "PRODUCTION") {
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(fileUpload());
 app.use(
   cors({
     credentials: true,
