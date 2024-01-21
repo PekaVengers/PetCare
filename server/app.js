@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 
 // FOR DEPLOYMENT -
 app.get("/", (req, res) => {
-  res.send("<h1>Processing</h1>"); 
+  res.send("<h1>Processing</h1>");
 });
 
 // MIDDLEWARES -
