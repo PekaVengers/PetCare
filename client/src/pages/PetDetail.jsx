@@ -30,7 +30,7 @@ export default function PetDetail() {
         <div className="mb-4">
           <UpdatePetButton />
           <OpenPetButton petId={petData.id} />
-          <DeletePetButton />
+          <DeletePetButton petId={petData.id} />
         </div>
       )}
       <div className="mb-4">
