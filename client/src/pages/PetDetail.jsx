@@ -29,7 +29,7 @@ export default function PetDetail() {
       {user.id === petData.ownerId && (
         <div className="mb-4">
           <UpdatePetButton />
-          <OpenPetButton />
+          <OpenPetButton petId={petData.id} />
           <DeletePetButton />
         </div>
       )}

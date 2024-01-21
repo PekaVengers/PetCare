@@ -21,7 +21,7 @@ export default function Profile() {
       interests: "these are the interests of the dog",
     },
     {
-      id: 1,
+      id: 2,
       name: "meow",
       type: "cat",
       breed: "breed 1",

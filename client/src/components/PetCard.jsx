@@ -20,7 +20,7 @@ export default function PetCard({ id, name, type, breed }) {
       </Link>
       <div className="flex justify-between">
         <DeletePetButton />
-        <OpenPetButton />
+        <OpenPetButton petId={id} />
       </div>
     </div>
   )
