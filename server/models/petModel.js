@@ -38,7 +38,7 @@ const petSchema = new mongoose.Schema(
     },
 
     petAge: {
-      type: Number,
+      type: String,
       required: [true, "Please enter the pet age"],
     },
 

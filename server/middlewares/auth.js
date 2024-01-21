@@ -6,13 +6,13 @@ const userModel = require("../models/userModel");
 
 // AUTHENTICATE USER -
 exports.isAuthUser = AsynErr(async (req, res, next) => {
-  const { token } = req.headers.accessToken;
-  
-  if (!token) {
+  const { accesstoken } = req.headers;
+
+  if (!accesstoken) {
     return next(new ErrorHandler("Please login to access", 401));
   }
 
-  const decodeData = jwt.verify(token, process.env.JWT_SECRET);
+  const decodeData = jwt.verify(accesstoken, process.env.JWT_SECRET);
   req.user = await userModel.findById(decodeData.id);
 
   next();
