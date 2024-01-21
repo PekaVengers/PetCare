@@ -1,6 +1,7 @@
 import BorrowCard from "../components/BorrowCard";
+import AddPetButton from "../components/pet_buttons/AddPetButton";
 
-export default function BorrowList() {
+export default function PetsList() {
   const pets = [
     {
       id: 1,
@@ -26,6 +27,7 @@ export default function BorrowList() {
   return (
     <div>
       <div className="pets">
+        <AddPetButton />
         {
           pets.map(({ id, name, type, from, to }) => (
             <BorrowCard key={id} id={id} name={name} type={type} from={from} to={to} />
