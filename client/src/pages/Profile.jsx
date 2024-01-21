@@ -19,25 +19,43 @@ export default function Profile() {
       precautions: "these are the precatuions",
       interests: "these are the interests of the dog",
     },
+    {
+      id: 1,
+      name: "meow",
+      type: "cat",
+      breed: "breed 1",
+      precautions: "these are the precatuions for cat",
+      interests: "these are the interests of the cat",
+    },
   ];
   const loaderData = useLoaderData();
 
   return (
-    <div>
-      <div className="user-profile">
-        <div id="user-name">Name - {loaderData.name}</div>
-        <div id="user-email">Email - {loaderData.email}</div>
+    <div className="container mx-auto mt-8 p-4">
+      <div className="user-profile bg-white p-6 rounded-md shadow-md mb-8">
+        <div className="mb-4">
+          <div className="font-bold text-lg mb-2">Name - {loaderData.name}</div>
+          <div>Email - {loaderData.email}</div>
+        </div>
         <div id="user-location">Location - {loaderData.location}</div>
       </div>
 
-      <Link to="/add-pet" id="add-pet">Add Pet</Link>
-      <div className="pets">
-        <h1>Your Pets</h1>
-        {pets.map(pet => (
-          <PetCard key={pet.id} name={pet.name} type={pet.type} breed={pet.breed} />
-        ))}
-      </div>
+      <Link
+        to="/add-pet"
+        id="add-pet"
+        className="bg-blue-500 text-white px-4 py-2 rounded-md inline-block mb-4"
+      >
+        Add Pet
+      </Link>
 
+      <div className="pets">
+        <h1 className="text-2xl font-bold mb-4">Your Pets</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {pets.map(({ id, name, type, breed }) => (
+            <PetCard key={id} id={id} name={name} type={type} breed={breed} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

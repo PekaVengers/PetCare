@@ -8,6 +8,7 @@ import Profile, {loader as profileLoader} from './pages/Profile';
 import AddPet, {action as addPetAction} from './pages/AddPet';
 import BorrowList from './pages/BorrowList';
 import {action as borrowAction} from "./components/BorrowCard";
+import PetDetail, {loader as petDetailLoader} from './pages/PetDetail';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,11 @@ const router = createBrowserRouter([
         action: borrowAction,
         path: "pets",
         element: <BorrowList />,
+      },
+      {
+        loader: petDetailLoader,
+        path: "pets/:id",
+        element: <PetDetail />,
       },
     ]
   }
