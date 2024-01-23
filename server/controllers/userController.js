@@ -6,7 +6,7 @@ const sendToken = require("../utils/jwtToken");
 
 // REGISTER A USER -
 exports.registerUser = AsyncErr(async (req, res, next) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password } = req.body;
 
   // FILLING ALL THE FIELDS -
   if (!name || !email || !password) {
