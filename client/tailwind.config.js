@@ -8,7 +8,7 @@ export default {
         secondary: '#92EEE8',
       },
       fontFamily: {
-        primary: 'Balsamiq Sans',
+        primary: 'Quicksand',
       },
       screens: {
         'xxl': '1751px',
