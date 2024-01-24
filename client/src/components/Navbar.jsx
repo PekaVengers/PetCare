@@ -3,7 +3,7 @@ import logo from "../assets/images/logo.png";
 
 export default function Navbar() {
   return (
-    <nav className="bg-transparent p-4 font-primary uppercase">
+    <nav className="bg-transparent p-4 font-primary uppercase absolute top-0 w-full">
       <div className="container mx-auto flex items-center text-[1.3rem] justify-between text-[#080909] font-semibold">
         <NavLink to="/" className="text-[1.5rem] font-semibold">
           <img src={logo} alt="logo" className="w-[6rem] h-[6rem]"/>
