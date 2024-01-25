@@ -10,7 +10,6 @@ export default function Navbar() {
         </NavLink>
         <div className="flex space-x-4 justify-center items-center">
           <NavLink to="/pets">Pets</NavLink>
-          <NavLink to="/about">About</NavLink>
           <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/register">Register</NavLink>
           <NavLink to="/login" className="text-[#DFE8FD] bg-[#0B0019] rounded-[2rem] py-[0.1rem] px-[2rem] hover:bg-[#DFE8FD] hover:text-[#0B0019] border-2 border-black">Login</NavLink>
