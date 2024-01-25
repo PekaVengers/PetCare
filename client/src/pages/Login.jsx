@@ -1,4 +1,5 @@
 import { Form } from "react-router-dom";
+import SectionHeading from "../components/SectionHeading";
 
 // eslint-disable-next-line no-unused-vars
 export async function action({ params, request }) {
@@ -11,7 +12,8 @@ export async function action({ params, request }) {
 
 export default function Login() {
   return (
-    <div className="w-full h-screen bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center border-2 border-black">
+    <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center">
+      <SectionHeading heading="Login" styles="text-[4rem]" />
       <Form
         method="POST"
         className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#f8aa26] text-[#0B0019] font-semibold font-primary"
@@ -36,7 +38,7 @@ export default function Login() {
           name="password"
           id="password"
         />
-                <button
+        <button
           type="submit"
           className="w-full p-2 bg-[#bbdafa] text-[#080909] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
         >

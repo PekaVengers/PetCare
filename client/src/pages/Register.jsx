@@ -1,4 +1,5 @@
 import { Form } from "react-router-dom";
+import SectionHeading from "../components/SectionHeading"
 
 // eslint-disable-next-line no-unused-vars
 export async function action({ params, request }) {
@@ -15,6 +16,7 @@ export async function action({ params, request }) {
 export default function Register() {
   return (
     <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem]">
+      <SectionHeading heading="Register" styles="text-[4rem]"/>
       <Form
         method="POST"
         className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#bbdafa] text-[#0B0019] font-semibold font-primary"

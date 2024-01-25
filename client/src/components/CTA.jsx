@@ -19,7 +19,7 @@ const CTA = () => {
         <br/>
         Go Ahead!
         </h1>
-        <LightButton buttonText="HEHE" className="bg-red-700"/>
+        <LightButton buttonText="Lend Pet" className="bg-red-700"/>
       </div>
     </div>
   )

@@ -5,9 +5,9 @@ const SectionHeading = (props) => {
   const { heading, styles } = props;
   return (
     <h1
-      className={`${
+      className={`relative text-[6rem] font-primary uppercase font-bold my-[1rem] ${
         styles ? styles : ""
-      } relative text-[6rem] font-primary uppercase font-bold my-[1rem]`}
+      }`}
     >
       {heading}{" "}
       <img
