@@ -1,6 +1,4 @@
 import { Form } from "react-router-dom";
-import bgImage from "../assets/images/loginBg.png";
-import logo from "../assets/images/petcareLogo.png";
 
 // eslint-disable-next-line no-unused-vars
 export async function action({ params, request }) {
@@ -13,32 +11,34 @@ export async function action({ params, request }) {
 
 export default function Login() {
   return (
-    <div
-      className="w-full h-screen bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center border-2 border-black"
-      style={{ background: `url(${bgImage})` }}
-    >
-      <img src={logo} alt="logo" className="w-[400px] h-auto" />
+    <div className="w-full h-screen bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center border-2 border-black">
       <Form
         method="POST"
-        className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md bg-[#080909] text-black"
+        className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#f8aa26] text-[#0B0019] font-semibold font-primary"
       >
+        <label className="block mb-2" htmlFor="email">
+          Email
+        </label>
         <input
           required
-          className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none"
+          className="mb-4 w-full p-2 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
           type="email"
           name="email"
-          placeholder="Email"
+          id="email"
         />
+        <label className="block mb-2" htmlFor="password">
+          Password
+        </label>
         <input
           required
-          className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none"
+          className="mb-8 w-full p-2 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
           type="password"
           name="password"
-          placeholder="Password"
+          id="password"
         />
-        <button
+                <button
           type="submit"
-          className="w-full p-2 bg-[#f8aa26] text-[#080909] rounded-md hover:opacity-[0.8] hover:text-[#080909] uppercase font-bold"
+          className="w-full p-2 bg-[#bbdafa] text-[#080909] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
         >
           Login
         </button>
