@@ -17,7 +17,7 @@ export default function Register() {
     <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem]">
       <Form
         method="POST"
-        className="max-w-md mx-auto px-[3rem] py-[2rem] bg-white shadow-md rounded-[1rem] bg-[#bbdafa] text-[#0B0019] font-semibold font-primary"
+        className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#bbdafa] text-[#0B0019] font-semibold font-primary"
       >
         <label className="block mb-2" htmlFor="name">
           Name
