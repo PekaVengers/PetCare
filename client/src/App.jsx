@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import About from './pages/About';
 import Register, {action as registerAction} from './pages/Register';
 import Login, {action as loginAction} from './pages/Login';
 import Profile, {loader as profileLoader} from './pages/Profile';
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />
-      },
-      {
-        path: "about",
-        element: <About />
       },
       {
         action: registerAction,

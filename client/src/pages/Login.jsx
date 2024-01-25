@@ -1,12 +1,29 @@
 import { Form } from "react-router-dom";
 import SectionHeading from "../components/SectionHeading";
+import { BASE_URL } from "../utils/BASE_URL";
 
-// eslint-disable-next-line no-unused-vars
-export async function action({ params, request }) {
+// eslint-disable-next-line no-unused-vars, react-refresh/only-export-components
+export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log("submitting", email, password);
+  try {
+    const response = await fetch(`${BASE_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      }),
+    });
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
+    console.log('Login response:', data);
+  } catch (error) {
+    console.error('Error during login request:', error);
+  }
   return null;
 }
 
@@ -18,7 +35,7 @@ export default function Login() {
         method="POST"
         className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#f8aa26] text-[#0B0019] font-semibold font-primary"
       >
-        <label className="block mb-2" htmlFor="email">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="email">
           Email
         </label>
         <input
@@ -28,7 +45,7 @@ export default function Login() {
           name="email"
           id="email"
         />
-        <label className="block mb-2" htmlFor="password">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="password">
           Password
         </label>
         <input
@@ -40,7 +57,7 @@ export default function Login() {
         />
         <button
           type="submit"
-          className="w-full p-2 bg-[#bbdafa] text-[#080909] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
+          className="w-full p-2 bg-[#bbdafa] text-[#080909] text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
         >
           Login
         </button>
