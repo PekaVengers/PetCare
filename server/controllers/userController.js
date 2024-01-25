@@ -17,7 +17,7 @@ exports.registerUser = AsyncErr(async (req, res, next) => {
   const user = await userModel.findOne({ email });
 
   if (user === null) {
-    await userModel.create({ name, email, password, role });
+    await userModel.create({ name, email, password });
     res.status(201).json({
       success: true,
       message: "You are registered! Please login to proceed",
