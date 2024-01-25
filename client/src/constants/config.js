@@ -82,3 +82,61 @@ export const pets = [
       to: "01/01/2023",
     },
   ];
+
+
+export const userPets = [
+  {
+    id: 1,
+    name: "Tuffy",
+    age: 8,
+    type: "Dog",
+    breed: "Labrador",
+    precautions: "these are the precatuions",
+    interests: "these are the interests of the dog",
+  },
+  {
+    id: 2,
+    name: "meow",
+    age: 5,
+    type: "cat",
+    breed: "Unknown",
+    precautions: "these are the precatuions for cat",
+    interests: "these are the interests of the cat",
+  },
+  {
+    id: 1,
+    name: "Tuffy",
+    age: 8,
+    type: "Dog",
+    breed: "Labrador",
+    precautions: "these are the precatuions",
+    interests: "these are the interests of the dog",
+  },
+  {
+    id: 2,
+    name: "meow",
+    age: 5,
+    type: "cat",
+    breed: "Unknown",
+    precautions: "these are the precatuions for cat",
+    interests: "these are the interests of the cat",
+  },
+  {
+    id: 1,
+    name: "Tuffy",
+    age: 8,
+    type: "Dog",
+    breed: "Labrador",
+    precautions: "these are the precatuions",
+    interests: "these are the interests of the dog",
+  },
+  {
+    id: 2,
+    name: "meow",
+    age: 5,
+    type: "cat",
+    breed: "Unknown",
+    precautions: "these are the precatuions for cat",
+    interests: "these are the interests of the cat",
+  },
+];
