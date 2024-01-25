@@ -1,27 +1,53 @@
+import { BASE_URL } from "../utils/BASE_URL";
+import isStrongPassword from "../utils/isStrongPassword";
 import { Form } from "react-router-dom";
-import SectionHeading from "../components/SectionHeading"
+import SectionHeading from "../components/SectionHeading";
 
-// eslint-disable-next-line no-unused-vars
-export async function action({ params, request }) {
+// eslint-disable-next-line no-unused-vars, react-refresh/only-export-components
+export async function action({ request }) {
   const formData = await request.formData();
   const name = formData.get("name");
-  const location = formData.get("location");
   const email = formData.get("email");
+  const location = formData.get("location");
   const password = formData.get("password");
   const confirmPassword = formData.get("confirmPassword");
-  console.log("submitting", name, location, email, password, confirmPassword);
+  
+  if (!isStrongPassword(password)) {
+    console.error("Please enter a strong password.");
+  } else if (password !== confirmPassword) {
+    console.error("Passwords do not match!");
+  } else {
+    try {
+      const response = await fetch(`${BASE_URL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+          location: location
+        }),
+      });
+      const data = await response.json();
+      console.log("Register response:", data);
+    } catch (error) {
+      console.error("Error during register request:", error);
+    }
+  }
   return null;
 }
 
 export default function Register() {
   return (
-    <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem]">
-      <SectionHeading heading="Register" styles="text-[4rem]"/>
+    <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem] pt-[8rem] pb-[5rem]">
+      <SectionHeading heading="Register" styles="text-[4rem]" />
       <Form
-        method="POST"
+        method="post"
         className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#bbdafa] text-[#0B0019] font-semibold font-primary"
       >
-        <label className="block mb-2" htmlFor="name">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="name">
           Name
         </label>
         <input
@@ -32,7 +58,7 @@ export default function Register() {
           id="name"
         />
 
-        <label className="block mb-2" htmlFor="email">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="email">
           Email
         </label>
         <input
@@ -43,7 +69,7 @@ export default function Register() {
           id="email"
         />
 
-        <label className="block mb-2" htmlFor="location">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="location">
           Location
         </label>
         <input
@@ -54,7 +80,7 @@ export default function Register() {
           id="location"
         />
 
-        <label className="block mb-2" htmlFor="password">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="password">
           Password
         </label>
         <input
@@ -65,7 +91,7 @@ export default function Register() {
           id="password"
         />
 
-        <label className="block mb-2" htmlFor="confirmPassword">
+        <label className="block mb-2 text-[1.5rem]" htmlFor="confirmPassword">
           Confirm Password
         </label>
         <input
@@ -75,10 +101,9 @@ export default function Register() {
           name="confirmPassword"
           id="confirmPassword"
         />
-
         <button
           type="submit"
-          className="w-full p-2 bg-[#f8aa26] text-[#080909] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
+          className="w-full p-2 bg-[#f8aa26] text-[#080909] text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
         >
           Register
         </button>
