@@ -53,7 +53,7 @@ export default function Profile() {
         <AddPetButton buttonText="Add your pet" />
       </Link>
       <div className="pets mt-[2rem] w-[70%] flex flex-wrap justify-center gap-x-[2rem] gap-y-[3rem]">
-        {userPets.map(({ id, name, type, breed, age }) => (
+        {userPets.map(({ id, name, category, breed, age }) => (
           <>
             <div
               key={id}
@@ -66,7 +66,7 @@ export default function Profile() {
                     <h1 className="petName uppercase font-bold text-[2.5rem] leading-[2.5rem]">
                       {name}
                     </h1>
-                    <h3 className="breed text-[1.5rem]">{`${type}, ${breed}`}</h3>
+                    <h3 className="breed text-[1.5rem]">{`${category}, ${breed}`}</h3>
                     <h2 className="dateRange font-semibold text-[1.5rem]">
                       {`Age: ${age} Years`}
                     </h2>
@@ -84,7 +84,7 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            {/* <PetCard key={id} id={id} name={name} type={type} breed={breed} /> */}
+            {/* <PetCard key={id} id={id} name={name} category={category} breed={breed} /> */}
           </>
         ))}
       </div>
