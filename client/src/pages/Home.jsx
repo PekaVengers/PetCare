@@ -9,6 +9,7 @@ export default function Home() {
       <div className="bannerImage w-full">
      <img src={Banner} alt="banner_image" className="w-full h-full object-cover" />
       </div>
+      <h1 className="uppercase font-primary text-[4rem] text-center font-semibold mt-[5rem]">Our Vision</h1>
       <Hero/>
       <h1 className="uppercase font-primary mb-[2rem] text-[4rem] text-center font-semibold">Call To Action</h1>
       <CTA/>
