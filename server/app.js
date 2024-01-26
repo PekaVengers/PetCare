@@ -34,10 +34,12 @@ app.use(
 // ROUTES -
 const user = require("./routes/userRoute");
 const pet = require("./routes/petRoute");
+const apply = require("./routes/applyRoute");
 
 // END POINTS -
 app.use("/Petcare", user);
 app.use("/Petcare", pet);
+app.use("/Petcare", apply);
 
 // MIDDLEWARE  FOR ERRORS -
 app.use(errorMiddleware);
