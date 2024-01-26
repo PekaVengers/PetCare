@@ -38,6 +38,16 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
 
+    location: {
+      type: String,
+      required: [true, "Please enter your location"],
+    },
+
+    phoneNo: {
+      type: String,
+      required: [true, "Please enter your phone number"],
+    },
+
     role: {
       type: String,
       enum: ["admin", "user", "adopter"],

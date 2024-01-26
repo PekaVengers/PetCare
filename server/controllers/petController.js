@@ -15,6 +15,7 @@ exports.createPet = AsyncErr(async (req, res, next) => {
     petAge,
     petInterests,
     petPrecautions,
+    availableForBorrow,
   } = req.body;
 
   if (
@@ -25,7 +26,8 @@ exports.createPet = AsyncErr(async (req, res, next) => {
     !petGender ||
     !petAge ||
     !petInterests ||
-    !petPrecautions
+    !petPrecautions ||
+    !availableForBorrow
   ) {
     return next(new ErrorHandler("Please fill all the fields", 400));
   }
@@ -49,6 +51,7 @@ exports.createPet = AsyncErr(async (req, res, next) => {
     petAge,
     petInterests,
     petPrecautions,
+    availableForBorrow,
     user: req.user.id,
   });
 
@@ -103,6 +106,8 @@ exports.updatePet = AsyncErr(async (req, res, next) => {
     petInterests: req.body.petInterests,
     petPrecautions: req.body.petPrecautions,
     availableForBorrow: req.body.availableForBorrow,
+    startDate: req.body.startDate, 
+    endDate: req.body.endDate,
   };
 
   let pet = await petModel.findById(req.params.id);

@@ -2,14 +2,13 @@
 const ErrorHandler = require("../utils/errorHandler");
 const AsyncErr = require("../middlewares/asyncErr");
 const userModel = require("../models/userModel");
-const sendToken = require("../utils/jwtToken");
 
 // REGISTER A USER -
 exports.registerUser = AsyncErr(async (req, res, next) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, location, phoneNo } = req.body;
 
   // FILLING ALL THE FIELDS -
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !location || !phoneNo) {
     return next(new ErrorHandler("Please fill all the fields", 400));
   }
 
@@ -17,7 +16,7 @@ exports.registerUser = AsyncErr(async (req, res, next) => {
   const user = await userModel.findOne({ email });
 
   if (user === null) {
-    await userModel.create({ name, email, password, role });
+    await userModel.create({ name, email, password, location, phoneNo });
     res.status(201).json({
       success: true,
       message: "You are registered! Please login to proceed",
@@ -51,18 +50,22 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  sendToken(user, 200, res);
-});
-
-// LOGOUT -
-exports.logoutUser = AsyncErr(async (req, res, next) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-    httpOnly: true,
-  });
+  // GET TOKEN -
+  const token = user.generateJwt();
 
   res.status(200).json({
     success: true,
-    message: "Logged out successfully",
+    message: "You are logged in!",
+    token,
+  });
+});
+
+// GET USER DETAILS -
+exports.getUserDetails = AsyncErr(async (req, res) => {
+  const user = await userModel.findById({ _id: req.user.id });
+
+  res.status(200).json({
+    success: true,
+    user
   });
 });
