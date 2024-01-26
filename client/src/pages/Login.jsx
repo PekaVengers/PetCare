@@ -1,48 +1,79 @@
-import { Form } from "react-router-dom";
-import bgImage from "../assets/images/loginBg.png";
-import logo from "../assets/images/petcareLogo.png";
+import SectionHeading from "../components/SectionHeading";
+import { BASE_URL } from "../utils/BASE_URL";
+import { useAuth } from '../contexts/AuthContext';
 
-// eslint-disable-next-line no-unused-vars
-export async function action({ params, request }) {
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
-  console.log("submitting", email, password);
-  return null;
-}
 
+// eslint-disable-next-line no-unused-vars, react-refresh/only-export-components
 export default function Login() {
-  return (
-    <div
-      className="w-full h-screen bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center border-2 border-black"
-      style={{ background: `url(${bgImage})` }}
-    >
-      <img src={logo} alt="logo" className="w-[400px] h-auto" />
-      <Form
+  const { login } = useAuth();
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const response = await fetch(`${BASE_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        // Update authentication state upon successful login
+        login();
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('name', data.user.name);
+        localStorage.setItem('email', data.user.email);
+      } else {
+        alert('Invalid email or password!');
+      }
+    } catch (error) {
+      console.error('Error during login request:', error);
+    }
+  };
+
+return (
+    <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center">
+      <SectionHeading heading="Login" styles="text-[4rem]" />
+      <form
         method="POST"
-        className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md bg-[#080909] text-black"
+        className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#f8aa26] text-[#0B0019] font-semibold font-primary"
       >
+        <label className="block mb-2 text-[1.5rem]" htmlFor="email">
+          Email
+        </label>
         <input
           required
-          className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none"
+          className="mb-4 w-full p-2 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
           type="email"
           name="email"
-          placeholder="Email"
+          id="email"
         />
+        <label className="block mb-2 text-[1.5rem]" htmlFor="password">
+          Password
+        </label>
         <input
           required
-          className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none"
+          className="mb-8 w-full p-2 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
           type="password"
           name="password"
-          placeholder="Password"
+          id="password"
         />
         <button
           type="submit"
-          className="w-full p-2 bg-[#f8aa26] text-[#080909] rounded-md hover:opacity-[0.8] hover:text-[#080909] uppercase font-bold"
+          onClick={handleLoginSubmit}
+          className="w-full p-2 bg-[#bbdafa] text-[#080909] text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
         >
           Login
         </button>
-      </Form>
+      </form>
     </div>
   );
 }

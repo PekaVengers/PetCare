@@ -1,15 +1,17 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Register, {action as registerAction} from './pages/Register';
-import Login, {action as loginAction} from './pages/Login';
-import Profile, {loader as profileLoader} from './pages/Profile';
-import AddPet, {action as addPetAction} from './pages/AddPet';
-import {action as borrowAction} from "./components/BorrowCard";
-import PetDetail, {loader as petDetailLoader} from './pages/PetDetail';
-import PetsList from './pages/PetsList';
-import OpenForBorrow, {action as openBorrowAction} from './pages/OpenForBorrow';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Register, { action as registerAction } from "./pages/Register";
+import Login from "./pages/Login";
+import Profile, { loader as profileLoader } from "./pages/Profile";
+import AddPet, { action as addPetAction } from "./pages/AddPet";
+import { action as borrowAction } from "./components/BorrowCard";
+import PetDetail, { loader as petDetailLoader } from "./pages/PetDetail";
+import PetsList from "./pages/PetsList";
+import OpenForBorrow, {
+  action as openBorrowAction,
+} from "./pages/OpenForBorrow";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -18,11 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
-      },
-      {
-        path: "about",
-        element: <About />
+        element: <Home />,
       },
       {
         action: registerAction,
@@ -30,14 +28,13 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        action: loginAction,
         path: "login",
-        element: <Login />
+        element: <Login />,
       },
       {
         path: "profile",
         element: <Profile />,
-        loader: profileLoader
+        loader: profileLoader,
       },
       {
         action: addPetAction,
@@ -59,12 +56,14 @@ const router = createBrowserRouter([
         path: "open-borrow/:id",
         element: <OpenForBorrow />,
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 export default function App() {
   return (
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
