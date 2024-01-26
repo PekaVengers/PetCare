@@ -57,13 +57,21 @@ const petSchema = new mongoose.Schema(
     availableForBorrow: {
       type: Boolean,
       enum: [true, false],
-      default: false,
+      required: [true, "Please select whether to borrow"],      
     },
 
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
       required: true,
+    },
+
+    startDate: {
+      type: Date,
+    },
+
+    endDate: {
+      type: Date,
     },
   },
 
