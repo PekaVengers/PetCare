@@ -2,6 +2,7 @@ import { Form, redirect } from "react-router-dom";
 import bgImage from "../assets/images/loginBg.png";
 import logo from "../assets/images/petcareLogo.png";
 import { useState } from "react";
+import SectionHeading from "../components/SectionHeading";
 
 export async function action({params, request}) {
   const formData = await request.formData();
@@ -33,14 +34,19 @@ export default function () {
   }
 
   return (
-    <div className="w-full h-screen bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center gap-[1rem] border-2 border-black" style={{ background: `url(${bgImage})` }}>
-      <img src={logo} alt="logo" className="w-[400px] h-auto" />
-      <Form method="POST" className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md bg-[#080909]">
-        <input required className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none" type="text" name="name" placeholder="Name" />
-        <input type="file" />
+    //  style={{ background: `url(${bgImage})` }}
+    <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem] pt-[8rem] pb-[5rem]">
+      <SectionHeading heading="Add Pet" styles="text-[4rem]" />
+      <Form method="POST" className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#15022DCC] text-white font-semibold font-primary">
+        <input required className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-white" type="text" name="name" placeholder="Name" />
+        <div className="relative">
+          <input name="image" type="file" className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#0B0019] file:text-[#EEF3FF]" accept="image/png, image/jpeg" placeholder="Upload a image"/>
+        </div>
         <div>
-
-          <select onChange={updateBreedOpts} name="type">
+          <input required className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-white" type="text" name="age" placeholder="Age" />
+        </div>
+        <div>
+          <select className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none text-slate-500 bg-[#0B0019] text-white" onChange={updateBreedOpts} name="type">
             {petTypes.map((petType) => (
               <option key={petType} value={petType}>{petType}</option>
             ))}
@@ -48,7 +54,7 @@ export default function () {
         </div>
 
         <div>
-          <select name="breed">
+          <select name="breed" className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none text-slate-500 bg-[#0B0019]">
             {curType ?
               petBreeds[curType].map((breed) => (
                 <option key={breed} value={breed}>{breed}</option>
@@ -58,12 +64,11 @@ export default function () {
             }
           </select>
         </div>
-
         <div>
-          <textarea name="precautions" cols="30" rows="10"></textarea>
+          <textarea className="bg-[#0B0019]" placeholder="Bio" name="interests" cols="34" rows="5"></textarea>
         </div>
         <div>
-          <textarea name="interests" cols="30" rows="10"></textarea>
+        <input required className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019]" type="text" name="Year of Birth" placeholder="Year of Birth" />
         </div>
         <button type="submit" className="w-full p-2 bg-[#f8aa26] text-[#080909] rounded-md hover:opacity-[0.8] hover:text-[#080909] uppercase font-semibold">Add Pet</button>
       </Form>
