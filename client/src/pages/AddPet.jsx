@@ -1,7 +1,8 @@
-import { Form, redirect } from "react-router-dom";
+import { Form} from "react-router-dom";
 import { useState } from "react";
 import SectionHeading from "../components/SectionHeading";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function action({request}) {
   const formData = await request.formData();
   console.log(formData);
@@ -15,7 +16,7 @@ export default function AddPet() {
       "Ragdoll", "Sphynx","Maine Coone", "Abyssinian",
     ],
     "Dog": [
-      "Labrador", "Husky", "Bulldog","Poodle", "German Shepherd",,
+      "Labrador", "Husky", "Bulldog","Poodle", "German Shepherd",
     ],
     "Rabbit": [
       "Mini Lop", "Rex", "Lionhead",
