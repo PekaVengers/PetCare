@@ -4,7 +4,7 @@ import DarkButton from "../components/pets/DarkButton";
 import AddPetButton from "../components/buttons/DarkButton";
 import YellowButton from "../components/pets/YellowButton";
 import SectionHeading from "../components/SectionHeading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userPets } from "../constants/config";
 
 export async function loader() {
@@ -21,6 +21,13 @@ export default function Profile() {
   const [phoneNo, setPhoneNo] = useState("9876543210");
   const [email, setEmail] = useState("mastermickey2000@gmail.com");
   const loaderData = useLoaderData();
+
+  useEffect(()=>{
+    setUsername(localStorage.getItem("name"));
+    setUserLocation(localStorage.getItem("location"));
+    setPhoneNo(localStorage.getItem("phoneNo"));
+    setEmail(localStorage.getItem("email"));
+  },[])
 
   return (
     <div className="w-full min-h-screen pt-[10rem] pb-[5rem] bg-[#FEFFC0] flex flex-col items-center">
