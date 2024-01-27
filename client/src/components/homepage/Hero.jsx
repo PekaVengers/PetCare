@@ -1,5 +1,5 @@
-import DogBlob from "../assets/images/DoggyBlob.png";
-import CatBlob from "../assets/images/CatBlob.png";
+import DogBlob from "../../assets/images/DoggyBlob.png";
+import CatBlob from "../../assets/images/CatBlob.png";
 
 const Hero = () => {
   return (
