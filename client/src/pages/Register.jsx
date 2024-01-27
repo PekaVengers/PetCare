@@ -8,10 +8,11 @@ export async function action({ request }) {
   const formData = await request.formData();
   const name = formData.get("name");
   const email = formData.get("email");
+  const phoneNo = formData.get("phoneNo");
   const location = formData.get("location");
   const password = formData.get("password");
   const confirmPassword = formData.get("confirmPassword");
-  
+
   if (!isStrongPassword(password)) {
     console.error("Please enter a strong password.");
   } else if (password !== confirmPassword) {
@@ -26,8 +27,9 @@ export async function action({ request }) {
         body: JSON.stringify({
           name: name,
           email: email,
+          phoneNo: phoneNo,
           password: password,
-          location: location
+          location: location,
         }),
       });
       const data = await response.json();
@@ -67,6 +69,17 @@ export default function Register() {
           type="email"
           name="email"
           id="email"
+        />
+
+<label className="block mb-2 text-[1.5rem]" htmlFor="phoneNo">
+          Phone Number
+        </label>
+        <input
+          required
+          className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
+          type="tel"
+          name="phoneNo"
+          id="phoneNo"
         />
 
         <label className="block mb-2 text-[1.5rem]" htmlFor="location">
