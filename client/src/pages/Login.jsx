@@ -27,12 +27,14 @@ export default function Login() {
       });
 
       const data = await response.json();
+      console.log(data);
       if (data.success) {
         // Update authentication state upon successful login
         login();
         localStorage.setItem('token', data.token);
         localStorage.setItem('name', data.user.name);
         localStorage.setItem('email', data.user.email);
+        localStorage.setItem("phoneNo", data.user.phoneNo);
         navigate("/profile");
       } else {
         alert('Invalid email or password!');
