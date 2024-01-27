@@ -1,5 +1,5 @@
-import DarkButton from "./buttons/DarkButton";
-import LightButton from "./buttons/LightButton";
+import DarkButton from "../buttons/DarkButton";
+import LightButton from "../buttons/LightButton";
 
 const CTA = () => {
   return (
@@ -25,4 +25,5 @@ const CTA = () => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default CTA;

@@ -18,6 +18,8 @@ export async function loader() {
 export default function Profile() {
   const [username, setUsername] = useState("Master");
   const [userLocation, setUserLocation] = useState("Alwar, India");
+  const [phoneNo, setPhoneNo] = useState("9876543210");
+  const [email, setEmail] = useState("mastermickey2000@gmail.com");
   const loaderData = useLoaderData();
 
   return (
@@ -33,9 +35,12 @@ export default function Profile() {
                 {username}
               </h1>
               <h2 className="dateRange font-semibold text-[1.5rem]">
-                {`Location: ${userLocation}`}
+                {`${userLocation}`}
               </h2>
-              <h3 className="breed text-[1.3rem]">{`mastermickey2000@gmail.com`}</h3>
+              <h3 className="dateRange font-semibold text-[1.3rem]">
+                {`+91 ${phoneNo}`}
+              </h3>
+              <h3 className="breed text-[1.3rem]">{email}</h3>
             </div>
           </div>
           {/* <div className="buttons flex justify-between gap-[2rem]">

@@ -1,7 +1,7 @@
 import Banner from "../assets/images/banner2.png";
-import Hero from "../components/Hero";
-import CTA from "../components/CTA";
-import Testimonial from "../components/Testimonial";
+import Hero from "../components/homepage/Hero";
+import CTA from "../components/homepage/CTA";
+import Testimonial from "../components/homepage/Testimonial";
 
 export default function Home() {
   return (
