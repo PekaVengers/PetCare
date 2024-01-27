@@ -38,12 +38,12 @@ export default function Profile() {
               <h3 className="breed text-[1.3rem]">{`mastermickey2000@gmail.com`}</h3>
             </div>
           </div>
-          <div className="buttons flex justify-between gap-[2rem]">
+          {/* <div className="buttons flex justify-between gap-[2rem]">
             <DarkButton
               buttonText="Demo Button"
               styles="bg-[#F8AA26] text-[1.2rem] px-[2rem] py-[0.3rem] text-black"
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <h2 className="relative text-[4rem] font-primary uppercase font-bold my-[1rem]">
