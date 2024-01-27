@@ -38,7 +38,6 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
   }
 
   const user = await userModel.findOne({ email }).select("+password");
-
   if (!user) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
@@ -57,6 +56,7 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
     success: true,
     message: "You are logged in!",
     token,
+    user
   });
 });
 
