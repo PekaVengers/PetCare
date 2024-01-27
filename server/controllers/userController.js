@@ -50,7 +50,7 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
   }
 
   // GET TOKEN -
-  const token = user.generateJwt();
+  const token = user.generateJwt(); 
 
   res.status(200).json({
     success: true,
@@ -60,12 +60,3 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
   });
 });
 
-// GET USER DETAILS -
-exports.getUserDetails = AsyncErr(async (req, res) => {
-  const user = await userModel.findById({ _id: req.user.id });
-
-  res.status(200).json({
-    success: true,
-    user
-  });
-});
