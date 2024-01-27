@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
 
   return (
@@ -16,7 +17,10 @@ export default function Navbar() {
           {isLoggedIn ? (
             <>
               <NavLink to="/profile">Profile</NavLink>
-              <button onClick={logout} className="uppercase">Logout</button>
+              <button onClick={()=>{
+                logout();
+                navigate("/");
+              }} className="uppercase">Logout</button>
             </>
           ) : (
             <>
