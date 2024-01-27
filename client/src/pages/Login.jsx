@@ -1,11 +1,13 @@
 import SectionHeading from "../components/SectionHeading";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from "react-router-dom";
 
 
 // eslint-disable-next-line no-unused-vars, react-refresh/only-export-components
 export default function Login() {
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ export default function Login() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('name', data.user.name);
         localStorage.setItem('email', data.user.email);
+        navigate("/profile");
       } else {
         alert('Invalid email or password!');
       }
