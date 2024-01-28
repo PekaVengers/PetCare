@@ -7,6 +7,7 @@ import Profile, { loader as profileLoader } from "./pages/Profile";
 import AddPet, { action as addPetAction } from "./pages/AddPet";
 import { action as borrowAction } from "./components/BorrowCard";
 import PetDetail, { loader as petDetailLoader } from "./pages/PetDetail";
+import Error from "./pages/Error"
 import PetsList from "./pages/PetsList";
 import OpenForBorrow, {
   action as openBorrowAction,
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <Error/>,
     children: [
       {
         index: true,
