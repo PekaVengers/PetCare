@@ -22,6 +22,10 @@ const petSchema = new mongoose.Schema(
       },
     },
 
+    ownerMessage: {
+      type: String,
+    },
+
     petType: {
       type: String,
       required: [true, "Please select the pet type"],
@@ -44,7 +48,6 @@ const petSchema = new mongoose.Schema(
 
     petInterests: {
       type: String,
-      required: [true, "Please enter the pet interests"],
       maxLength: [200, "The description cannot exceed 200 characters"],
     },
 
