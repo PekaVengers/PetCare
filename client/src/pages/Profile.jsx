@@ -101,7 +101,7 @@ export default function Profile() {
       <h2 className="relative text-[4rem] font-primary uppercase font-bold my-[1rem]">
         Your Pets
       </h2>
-      <Link to="add-pet">
+      <Link to="/add-pet">
         <AddPetButton buttonText="Add your pet" />
       </Link>
       <div className="pets mt-[2rem] w-[70%] flex flex-wrap justify-center gap-x-[2rem] gap-y-[3rem]">

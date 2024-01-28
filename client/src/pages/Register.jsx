@@ -33,6 +33,9 @@ export async function action({ request }) {
         }),
       });
       const data = await response.json();
+      if(data.success){
+        alert("You are successfully registered!");
+      }
       console.log("Register response:", data);
     } catch (error) {
       console.error("Error during register request:", error);
