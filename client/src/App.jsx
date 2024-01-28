@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Register, { action as registerAction } from "./pages/Register";
 import Login from "./pages/Login";
 import Profile, { loader as profileLoader } from "./pages/Profile";
-import AddPet, { action as addPetAction } from "./pages/AddPet";
+import AddPet from "./pages/AddPet";
 import { action as borrowAction } from "./components/BorrowCard";
 import PetDetail, { loader as petDetailLoader } from "./pages/PetDetail";
 import Error from "./pages/Error"
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
         loader: profileLoader,
       },
       {
-        action: addPetAction,
         path: "add-pet",
         element: <AddPet />,
       },
