@@ -57,7 +57,7 @@ const petSchema = new mongoose.Schema(
     availableForBorrow: {
       type: Boolean,
       enum: [true, false],
-      required: [true, "Please select whether to borrow"],      
+      required: [true, "Please select whether to borrow"],
     },
 
     user: {

@@ -38,7 +38,6 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
   }
 
   const user = await userModel.findOne({ email }).select("+password");
-
   if (!user) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
@@ -51,21 +50,13 @@ exports.loginUser = AsyncErr(async (req, res, next) => {
   }
 
   // GET TOKEN -
-  const token = user.generateJwt();
+  const token = user.generateJwt(); 
 
   res.status(200).json({
     success: true,
     message: "You are logged in!",
     token,
-  });
-});
-
-// GET USER DETAILS -
-exports.getUserDetails = AsyncErr(async (req, res) => {
-  const user = await userModel.findById({ _id: req.user.id });
-
-  res.status(200).json({
-    success: true,
     user
   });
 });
+
