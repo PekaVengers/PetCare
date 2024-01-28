@@ -56,8 +56,17 @@ export default function AddPet() {
   const handleNextButtonSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    formData.append("profile", profile);
     formData.forEach((value, key) => {
       if (key === "image") {
+        return;
+      }
+      if (key === "availableForBorrow") {
+        if (value === "Yes") {
+          form[key] = "true";
+        } else {
+          form[key] = "false";
+        }
         return;
       }
       form[key] = value;
@@ -71,31 +80,29 @@ export default function AddPet() {
     const formData = new FormData(e.target);
     formData.forEach((value, key) => {
       if (key == "yob") {
-        form["petAge"] = "" +  new Date().getFullYear() - value;
+        form["petAge"] = "" + new Date().getFullYear() - value;
         return;
       }
       form[key] = value;
     });
-
     const bodyData = Object.fromEntries(
       Object.entries(form).filter(([, value]) => value)
     );
-    console.log(bodyData);
 
-    try{
-      const token = localStorage.getItem('token');
-      console.log("Body data: " + JSON.stringify({...bodyData}));
-      const res = await fetch(`${BASE_URL}/create`,{
-        method: 'POST',
+    console.log(bodyData);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${BASE_URL}/create`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'accesstoken': token,
+          "Content-Type": "multipart/form-data",
+          accesstoken: token,
         },
-        body: JSON.stringify({...bodyData}),
-      })
+        body: JSON.stringify({ ...bodyData }),
+      });
       const data = await res.json();
       console.log(data);
-    }catch(e){
+    } catch (e) {
       console.error("Error in posting data to server: ", e.message);
     }
   };

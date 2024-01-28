@@ -19,7 +19,7 @@ export default function PetsList() {
         const response = await fetch(BASE_URL + "/pets/all", {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         });
         const data = await response.json();
