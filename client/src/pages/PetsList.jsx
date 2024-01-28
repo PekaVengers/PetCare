@@ -50,8 +50,8 @@ export default function PetsList() {
                 category={petType}
                 breed={petBreed}
                 ownerMessage={ownerMessage || ""}
-                startDate={startDate || "15/01/2000"}
-                endDate={endDate || "25/01/2000"}
+                startDate={startDate?(startDate.slice(0,10).split('-').join('/')) : "15/01/2000"}
+                endDate={endDate?(endDate.slice(0,10).split('-').join('/')) : "25/01/2000"}
               />
             </>
           );
