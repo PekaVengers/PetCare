@@ -36,7 +36,7 @@ export default function PetsList() {
     <div className="bg-[#FEFFC0] w-full min-h-screen flex flex-col justify-center items-center">
       <SectionHeading heading="Pets" styles="mt-[10rem] mb-[2rem]" />
       {isLoggedIn && (
-        <Link to="add-pet">
+        <Link to="/add-pet">
           <DarkButton buttonText="Add your pet" />
         </Link>
       )}
