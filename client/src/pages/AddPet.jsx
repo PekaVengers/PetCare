@@ -56,7 +56,6 @@ export default function AddPet() {
   const handleNextButtonSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    formData.append("profile", profile);
     formData.forEach((value, key) => {
       if (key === "image") {
         return;
@@ -72,7 +71,8 @@ export default function AddPet() {
     const formData = new FormData(e.target);
     formData.forEach((value, key) => {
       if (key == "yob") {
-        form["age"] = new Date().getFullYear() - value;
+        form["petAge"] = "" +  new Date().getFullYear() - value;
+        return;
       }
       form[key] = value;
     });
@@ -84,6 +84,7 @@ export default function AddPet() {
 
     try{
       const token = localStorage.getItem('token');
+      console.log("Body data: " + JSON.stringify({...bodyData}));
       const res = await fetch(`${BASE_URL}/create`,{
         method: 'POST',
         headers: {
@@ -97,8 +98,6 @@ export default function AddPet() {
     }catch(e){
       console.error("Error in posting data to server: ", e.message);
     }
-
-    console.log(BASE_URL)
   };
 
   return (
@@ -113,7 +112,7 @@ export default function AddPet() {
           <input
             required
             type="text"
-            name="name"
+            name="petName"
             placeholder="Name"
             className="mb-4 w-full p-2 rounded-md outline-none bg-[#fefefe] outline-none text-[#0B0019]"
           />
@@ -133,7 +132,7 @@ export default function AddPet() {
             <select
               className="mb-4 w-full p-2 rounded-md outline-none bg-[#fefefe] outline-none text-[#0B0019]"
               onChange={updateBreedOpts}
-              name="type"
+              name="petType"
             >
               {petTypes.map((petType) => (
                 <option key={petType} value={petType}>
@@ -145,7 +144,7 @@ export default function AddPet() {
 
           <div>
             <select
-              name="breed"
+              name="petBreed"
               className="mb-4 w-full p-2 rounded-md outline-none  bg-[#fefefe] outline-none text-[#0B0019]"
             >
               {curType ? (
@@ -163,7 +162,7 @@ export default function AddPet() {
           <div>
             <select
               className="mb-4 w-full p-2 rounded-md outline-none  bg-[#fefefe] outline-none text-[#0B0019]"
-              name="gender"
+              name="petGender"
             >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -171,12 +170,12 @@ export default function AddPet() {
           </div>
 
           <div>
-            <label htmlFor="availability" className="text-[#fefefe]">
+            <label htmlFor="availableForBorrow" className="text-[#fefefe]">
               Available for Borrow
             </label>
             <select
               className="mb-4 w-full p-2 rounded-md outline-none  bg-[#fefefe] outline-none text-[#0B0019]"
-              name="availability"
+              name="availableForBorrow"
               onChange={handleAvailability}
             >
               <option value="Yes">Yes</option>
@@ -238,6 +237,7 @@ export default function AddPet() {
               name="yob"
               placeholder="Year of Birth"
               pattern="\d{4}"
+              min={2000}
               max={new Date().getFullYear()}
             />
           </div>
@@ -247,7 +247,7 @@ export default function AddPet() {
               className="bg-[#fefefe] outline-none rounded-md p-2 mb-2"
               placeholder="Precautions"
               required
-              name="precautions"
+              name="petPrecautions"
               cols="34"
               rows="2"
             ></textarea>

@@ -17,6 +17,8 @@ exports.createPet = AsyncErr(async (req, res, next) => {
     availableForBorrow,
   } = req.body;
 
+  console.log(req.body);
+
   if (
     !petName ||
     !profile ||
