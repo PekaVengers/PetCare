@@ -6,7 +6,7 @@ PetCare is a project aimed at providing comprehensive care for your beloved pets
 
 # Demo
 
-Frotend: [https://pet-care-nu.vercel.app]()
+Frontend: [https://pet-care-nu.vercel.app]()
 
 Backend: [https://pet-care-iota.vercel.app]()
 
@@ -16,7 +16,7 @@ Figma: [https://www.figma.com/file/qyLny9fQEDsJvDN7ewkymO/PetCare-Pages?type=des
 
 <p align="left"> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> </p>
 
-# Run locally
+# Run App
 
 ###### Client
 
@@ -95,16 +95,14 @@ Cloudinary Link: [https://cloudinary.com/]()
 
 # Contributors
 
+- [Shubham Singodiya](https://github.com/singodiyashubham87) (Designer & Frontend Developer)
 - [Abdul Rehan](https://github.com/abrehan2) (FullStack Developer)
-- [Shubham Singodiya](https://github.com/singodiyashubham87) (FullStack Developer)
 - [Kailash Choudhary](https://github.com/kailashchoudhary11) (FullStack Developer)
 - [Vidip Ghosh](https://github.com/Vidip-Ghosh) (Frontend Developer)
 
-# Screenshots
+# License
 
-![1706546238604](image/README/1706546238604.png)
-
-![1706546256210](image/README/1706546256210.png)
+This project is licensed under the MIT License.
 
 # Acknowledgement
 
