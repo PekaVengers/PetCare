@@ -18,7 +18,7 @@ export async function loader() {
   }
 }
 
-export default function PetDetail() {
+export default function Petfolio() {
   const petData = useLoaderData();
   const user = {
     name: "some user", id: 1
