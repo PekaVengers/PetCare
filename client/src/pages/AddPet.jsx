@@ -10,7 +10,7 @@ export default function AddPet() {
   const [formOne, setFormOne] = useState(true);
   const [startDate, setStartDate] = useState("2024-01-01");
   const [endDate, setEndDate] = useState("");
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const [curType, setCurType] = useState("Cat");
   const petTypes = ["Cat", "Dog", "Rabbit"];
@@ -80,7 +80,7 @@ export default function AddPet() {
     const formData = new FormData(e.target);
     formData.forEach((value, key) => {
       if (key == "yob") {
-        form["petAge"] = "" + new Date().getFullYear() - value;
+        form["petAge"] = `${new Date().getFullYear() - value}`;
         return;
       }
       form[key] = value;
@@ -88,17 +88,29 @@ export default function AddPet() {
     const bodyData = Object.fromEntries(
       Object.entries(form).filter(([, value]) => value)
     );
-
     console.log(bodyData);
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${BASE_URL}/create`, {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           accesstoken: token,
         },
-        body: JSON.stringify({ ...bodyData }),
+        body: JSON.stringify({
+          petName: bodyData.petName,
+          petType: bodyData.petType,
+          petBreed: bodyData.petBreed,
+          petGender: bodyData.petGender,
+          petAge: bodyData.petAge,
+          profile: bodyData.profile,
+          availableForBorrow: bodyData.availableForBorrow,
+          startDate: bodyData.startDate,
+          endDate: bodyData.endDate,
+          petPrecautions: bodyData.petPrecautions,
+          petInterests: bodyData.petInterests,
+          ownerMessage: bodyData.ownerMessage
+        }),
       });
       const data = await res.json();
       console.log(data);
@@ -114,6 +126,7 @@ export default function AddPet() {
         <form
           onSubmit={handleNextButtonSubmit}
           id="formOne"
+          // encType="multipart/form-data"
           className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#15022DCC] text-[#0B0019] font-semibold font-primary"
         >
           <input
@@ -171,8 +184,8 @@ export default function AddPet() {
               className="mb-4 w-full p-2 rounded-md outline-none  bg-[#fefefe] outline-none text-[#0B0019]"
               name="petGender"
             >
-              <option value="Male">Male</option>
               <option value="Female">Female</option>
+              <option value="Male">Male</option>
             </select>
           </div>
 
@@ -185,8 +198,8 @@ export default function AddPet() {
               name="availableForBorrow"
               onChange={handleAvailability}
             >
-              <option value="Yes">Yes</option>
               <option value="No">No</option>
+              <option value="Yes">Yes</option>
             </select>
           </div>
 
@@ -255,16 +268,6 @@ export default function AddPet() {
               placeholder="Precautions"
               required
               name="petPrecautions"
-              cols="34"
-              rows="2"
-            ></textarea>
-          </div>
-
-          <div>
-            <textarea
-              className="bg-[#fefefe] outline-none rounded-md p-2 mb-2"
-              placeholder="Bio [Optional]"
-              name="bio"
               cols="34"
               rows="2"
             ></textarea>
