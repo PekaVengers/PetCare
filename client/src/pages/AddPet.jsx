@@ -99,17 +99,17 @@ export default function AddPet() {
         },
         body: JSON.stringify({
           petName: bodyData.petName,
+          profile: bodyData.profile,
           petType: bodyData.petType,
           petBreed: bodyData.petBreed,
           petGender: bodyData.petGender,
-          petAge: bodyData.petAge,
-          profile: bodyData.profile,
           availableForBorrow: bodyData.availableForBorrow,
-          startDate: bodyData.startDate,
-          endDate: bodyData.endDate,
+          startDate: bodyData.startDate || "",
+          endDate: bodyData.endDate || "",
+          petAge: bodyData.petAge,
           petPrecautions: bodyData.petPrecautions,
-          petInterests: bodyData.petInterests,
-          ownerMessage: bodyData.ownerMessage
+          petInterests: bodyData.petInterests || "",
+          ownerMessage: bodyData.ownerMessage || "",
         }),
       });
       const data = await res.json();
