@@ -83,7 +83,7 @@ DB_URL=YOUR_DB_URL
 
 MongoDB Link: [https://www.mongodb.com/]()
 
-Cloudinary Link: https://cloudinary.com/
+Cloudinary Link: [https://cloudinary.com/]()
 
 5. **Start the server**
 
