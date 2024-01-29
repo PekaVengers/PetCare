@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Profile, { loader as profileLoader } from "./pages/Profile";
 import AddPet from "./pages/AddPet";
 import { action as borrowAction } from "./components/BorrowCard";
-import PetDetail, { loader as petDetailLoader } from "./pages/PetDetail";
+import Petfolio, { loader as petfolioLoader } from "./pages/Petfolio";
 import Error from "./pages/Error"
 import PetsList from "./pages/PetsList";
 import OpenForBorrow, {
@@ -48,9 +48,9 @@ const router = createBrowserRouter([
         element: <PetsList />,
       },
       {
-        loader: petDetailLoader,
+        loader: petfolioLoader,
         path: "pets/:id",
-        element: <PetDetail />,
+        element: <Petfolio />,
       },
       {
         action: openBorrowAction,
