@@ -7,8 +7,6 @@ const cloudinary = require("cloudinary");
 // CREATE A PET -
 exports.createPet = AsyncErr(async (req, res, next) => {
   console.log(req.body);
-  
-  
   const {
     petName,
     profile,
@@ -17,6 +15,10 @@ exports.createPet = AsyncErr(async (req, res, next) => {
     petGender,
     petAge,
     petPrecautions,
+    petInterests,
+    ownerMessage,
+    startDate,
+    endDate,
     availableForBorrow,
   } = req.body;
 
