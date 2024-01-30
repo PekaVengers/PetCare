@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { petBreeds } from "../constants/config";
 import { BASE_URL } from "../utils/BASE_URL";
 
+// eslint-disable-next-line react/prop-types
 export default function AddPet() {
+  const [petId] = useState(localStorage.getItem("petId") || null);
+  const [updatePet, setUpdatePet] = useState(
+    localStorage.getItem("updatePet") || null
+  );
   // eslint-disable-next-line no-unused-vars
   const [form, setForm] = useState({});
   const [profile, setProfile] = useState("");
@@ -89,35 +94,82 @@ export default function AddPet() {
       Object.entries(form).filter(([, value]) => value)
     );
     console.log(bodyData);
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`${BASE_URL}/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-        body: JSON.stringify({
-          petName: bodyData.petName,
-          profile: bodyData.profile,
-          petType: bodyData.petType,
-          petBreed: bodyData.petBreed,
-          petGender: bodyData.petGender,
-          availableForBorrow: bodyData.availableForBorrow,
-          startDate: bodyData.startDate || "",
-          endDate: bodyData.endDate || "",
-          petAge: bodyData.petAge,
-          petPrecautions: bodyData.petPrecautions,
-          petInterests: bodyData.petInterests || "",
-          ownerMessage: bodyData.ownerMessage || "",
-        }),
-      });
-      const data = await res.json();
-      console.log(data);
-    } catch (e) {
-      console.error("Error in posting data to server: ", e.message);
+
+    if (updatePet) {
+      console.log("Update");
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${BASE_URL}/user/pet/${petId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            accesstoken: token,
+          },
+          body: JSON.stringify({
+            petName: bodyData.petName,
+            profile: bodyData.profile,
+            petType: bodyData.petType,
+            petBreed: bodyData.petBreed,
+            petGender: bodyData.petGender,
+            availableForBorrow: bodyData.availableForBorrow,
+            startDate: bodyData.startDate || "",
+            endDate: bodyData.endDate || "",
+            petAge: bodyData.petAge,
+            petPrecautions: bodyData.petPrecautions,
+            petInterests: bodyData.petInterests || "",
+            ownerMessage: bodyData.ownerMessage || "",
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.success) {
+          alert("Pet updated successfully");
+          localStorage.removeItem("updatePet");
+          localStorage.removeItem("petId");
+          setUpdatePet(false);
+        }
+      } catch (e) {
+        console.error("Error in posting data to server: ", e.message);
+      }
+    } else {
+      console.log("Not Update");
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${BASE_URL}/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accesstoken: token,
+          },
+          body: JSON.stringify({
+            petName: bodyData.petName,
+            profile: bodyData.profile,
+            petType: bodyData.petType,
+            petBreed: bodyData.petBreed,
+            petGender: bodyData.petGender,
+            availableForBorrow: bodyData.availableForBorrow,
+            startDate: bodyData.startDate || "",
+            endDate: bodyData.endDate || "",
+            petAge: bodyData.petAge,
+            petPrecautions: bodyData.petPrecautions,
+            petInterests: bodyData.petInterests || "",
+            ownerMessage: bodyData.ownerMessage || "",
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.success) {
+          alert("Pet added successfully");
+        }
+      } catch (e) {
+        console.error("Error in posting data to server: ", e.message);
+      }
     }
   };
+
+  useEffect(() => {
+    setUpdatePet(localStorage.getItem("updatePet"));
+  }, [updatePet]);
 
   return (
     <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem] pt-[8rem] pb-[5rem]">
