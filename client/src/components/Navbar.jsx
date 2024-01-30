@@ -17,10 +17,16 @@ export default function Navbar() {
           {isLoggedIn ? (
             <>
               <NavLink to="/profile">Profile</NavLink>
-              <button onClick={()=>{
-                logout();
-                navigate("/");
-              }} className="uppercase">Logout</button>
+              <button
+                onClick={() => {
+                  logout();
+                  localStorage.clear();
+                  navigate("/");
+                }}
+                className="uppercase"
+              >
+                Logout
+              </button>
             </>
           ) : (
             <>

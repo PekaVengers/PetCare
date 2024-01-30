@@ -25,6 +25,7 @@ export default function Profile() {
 
   const { isLoggedIn } = useAuth();
 
+  // eslint-disable-next-line no-unused-vars
   const loaderData = useLoaderData();
 
   // set initial values of user state variables from localStorage

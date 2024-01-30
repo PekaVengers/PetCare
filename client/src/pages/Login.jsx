@@ -35,6 +35,7 @@ export default function Login() {
         localStorage.setItem('email', data.user.email);
         localStorage.setItem('location', data.user.location);
         localStorage.setItem("phoneNo", data.user.phoneNo);
+        localStorage.setItem("isLoggedIn", "true");
         navigate("/profile");
       } else {
         alert('Invalid email or password!');

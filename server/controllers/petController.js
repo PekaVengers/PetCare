@@ -126,6 +126,7 @@ exports.updatePet = AsyncErr(async (req, res, next) => {
     availableForBorrow: req.body.availableForBorrow,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
+    ownerMessage: req.body.ownerMessage,
   };
 
   let pet = await petModel.findById(req.params.id);
