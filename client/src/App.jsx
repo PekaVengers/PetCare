@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         loader: petfolioLoader,
-        path: "pets/:id",
+        path: "pets/:petId",
         element: <Petfolio />,
       },
       {
