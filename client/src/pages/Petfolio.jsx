@@ -8,6 +8,7 @@ import DarkButton from "../components/buttons/DarkButton";
 export default function Petfolio() {
   // eslint-disable-next-line no-unused-vars
   const [petId, setPetId] = useState(useParams().petId);
+  const [adopterMessage, setAdopterMessage] = useState("");
   const [petDetails, setPetDetails] = useState({});
   const [dataFetched, setDataFetched] = useState(false);
   const { login } = useAuth();
@@ -34,6 +35,7 @@ export default function Petfolio() {
             },
           });
           const pet = await res.json();
+          console.log(pet);
           setPetDetails(pet.pet);
           if (!pet.success) {
             alert("Pet Not Found!");
@@ -58,6 +60,33 @@ export default function Petfolio() {
       {headingText ? headingText : `${localStorage.getItem(text)}`}
     </h2>
   );
+
+  const adoptPet = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`${BASE_URL}/adopt`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accesstoken: token,
+        },
+        body: JSON.stringify({
+          petId: petId,
+          message: adopterMessage,
+        }),
+      });
+      const data = await res.json();
+      data.success && alert("Adoption Request Sent Successfully!");
+    } catch (e) {
+      console.error("Error while fetching single pet details", e.message);
+    }
+  };
+
+  const onClickHandler = async () => {
+    const message = await prompt("Enter a message for the pet owner: ");
+    setAdopterMessage(message);
+    adoptPet();
+  };
 
   return (
     <>
@@ -107,6 +136,7 @@ export default function Petfolio() {
                     <DarkButton
                       buttonText="Adopt Now"
                       styles="text-[1rem] px-[2.5rem] py-[0.2rem]"
+                      onclick={onClickHandler}
                     />
                   ) : null}
                 </div>

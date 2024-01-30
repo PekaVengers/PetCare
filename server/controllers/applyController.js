@@ -53,6 +53,7 @@ const emailContext = (val, subject, name, petName, petType, status) => {
 
 // CREATE AN ADOPTION REQUEST -
 exports.createRequest = AsyncErr(async (req, res, next) => {
+  console.log(req.body);
   const { petId, message } = req.body;
 
   if (!message) {
