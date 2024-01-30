@@ -2,10 +2,11 @@ import SectionHeading from "../components/SectionHeading";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { BASE_URL } from "../utils/BASE_URL";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DarkButton from "../components/buttons/DarkButton";
 
 export default function Petfolio() {
+  const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [petId, setPetId] = useState(useParams().petId);
   const [adopterMessage, setAdopterMessage] = useState("");
@@ -82,8 +83,14 @@ export default function Petfolio() {
     }
   };
 
-  const onClickHandler = async () => {
-    const message = await prompt("Enter a message for the pet owner: ");
+  const updatePetHandler = async () => {
+    localStorage.setItem("updatePet", "true");
+    localStorage.setItem("petId", petId);
+    navigate("/add-pet");
+  };
+
+  const adoptNowHandler = async () => {
+    const message = prompt("Enter a message for the pet owner: ");
     setAdopterMessage(message);
     adoptPet();
   };
@@ -129,6 +136,7 @@ export default function Petfolio() {
                 </div>
                 <div className="buttons flex justify-between gap-[2rem]">
                   <DarkButton
+                    onclick={updatePetHandler}
                     buttonText="Update Pet"
                     styles="bg-[#F8AA26] text-[1rem] px-[2.5rem] py-[0.2rem] text-black"
                   />
@@ -136,7 +144,7 @@ export default function Petfolio() {
                     <DarkButton
                       buttonText="Adopt Now"
                       styles="text-[1rem] px-[2.5rem] py-[0.2rem]"
-                      onclick={onClickHandler}
+                      onclick={adoptNowHandler}
                     />
                   ) : null}
                 </div>
