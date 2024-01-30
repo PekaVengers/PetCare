@@ -1,4 +1,4 @@
-![1706539901084](image/README/1706539901084.png)
+![1706539901084](./client/src/assets/images/logo.png)
 
 # PetCare
 
