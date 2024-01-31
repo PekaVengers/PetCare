@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Register, { action as registerAction } from "./pages/Register";
 import Login from "./pages/Login";
-import Profile, { loader as profileLoader } from "./pages/Profile";
+import Profile from "./pages/Profile";
 import AddPet from "./pages/AddPet";
 import Petfolio from "./pages/Petfolio";
 import Error from "./pages/Error";
@@ -33,7 +33,6 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-        loader: profileLoader,
       },
       {
         path: "add-pet",

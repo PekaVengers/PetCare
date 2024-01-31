@@ -46,6 +46,7 @@ export default function PetsList() {
             <>
               <PetCard
                 key={_id}
+                petId={_id}
                 petName={petName}
                 category={petType}
                 breed={petBreed}
