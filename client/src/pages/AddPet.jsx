@@ -96,7 +96,6 @@ export default function AddPet() {
     );
     console.log(bodyData);
     if (updatePet) {
-      console.log("Update");
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${BASE_URL}/user/pet/${petId}`, {
@@ -132,7 +131,6 @@ export default function AddPet() {
         console.error("Error in posting data to server: ", e.message);
       }
     } else {
-      console.log("Not Update");
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${BASE_URL}/create`, {
