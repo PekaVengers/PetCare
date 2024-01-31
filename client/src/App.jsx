@@ -13,6 +13,7 @@ import OpenForBorrow, {
   action as openBorrowAction,
 } from "./pages/OpenForBorrow";
 import { AuthProvider } from "./contexts/AuthContext";
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
