@@ -6,8 +6,10 @@ import SectionHeading from "../components/SectionHeading";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from "../contexts/AuthContext";
+import Loader from "../components/Loader"
 
 export default function Profile() {
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [userLocation, setUserLocation] = useState("");
@@ -37,6 +39,7 @@ export default function Profile() {
   useEffect(() => {
     if (isLoggedIn) {
       const getUserPets = async () => {
+        setLoader(true);
         const token = localStorage.getItem("token");
         try {
           const response = await fetch(BASE_URL + "/user/pets", {
@@ -51,6 +54,7 @@ export default function Profile() {
         } catch (error) {
           console.error("Error during users pets request:", error);
         }
+        setLoader(false);
       };
       getUserPets();
     }
@@ -74,6 +78,9 @@ export default function Profile() {
 
   return (
     <>
+    {
+      loader && <Loader/>
+    }
       {pets && (
         <div className="w-full min-h-screen pt-[10rem] pb-[5rem] bg-[#FEFFC0] flex flex-col items-center">
           <SectionHeading heading="Profile" />
