@@ -8,21 +8,25 @@ PetCare is a project aimed at providing comprehensive care for your beloved pets
 
 # Demo
 
-Frontend: https://pet-care-nu.vercel.app
+- [PetCare Frontend](https://pet-care-nu.vercel.app) <br>
+- [PetCare Backend](https://pet-care-iota.vercel.app)  
+- [PetCare Figma Wireframes](https://www.figma.com/file/qyLny9fQEDsJvDN7ewkymO/PetCare-Pages?type=design&node-id=0%3A1&mode=design&t=gWCBknBpg1yyL8Gy-1)
 
-Backend: https://pet-care-iota.vercel.app
 
-Figma: https://www.figma.com/file/qyLny9fQEDsJvDN7ewkymO/PetCare-Pages?type=design&node-id=0%3A1&mode=design&t=gWCBknBpg1yyL8Gy-1
+
 
 # Tech Stacks
 
-<p align="left"> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> </p>
+<p align="center">
+<a href="https://skillicons.dev">
+<img src="https://skillicons.dev/icons?i=react,nodejs,expressjs,mongodb,figma" /></a></p>
+ 
 
 # Run App
 
 ###### Client
 
-1. **Fork the Repository** : Start by forking the PetCare repository to your own GitHub account.
+1. **Fork the Repository** : Start by forking the PetCare repository to your GitHub account
 2. **Clone the Repository**
 
 ```bash
@@ -67,8 +71,8 @@ git clone https://github.com/<your_github_username>/PetCare.git
   npm install
 ```
 
-3. **Create a .env file and place the value of the following:**
-
+3. **Create a .env file and place the following environment variables:**
+  
 ```bash
 CLOUDINARY_NAME=YOUR_CLOUDINARY_NAME
 CLOUDINARY_API_KEY=YOUR_CLOUDINARY_API_KEY
@@ -84,10 +88,7 @@ JWT_SECRET=YOUR_JWT_SECRET
 JWT_EXPIRE=YOUR_JWT_EXPIRE
 DB_URL=YOUR_DB_URL
 ```
-
-MongoDB Link: [https://www.mongodb.com/]()
-
-Cloudinary Link: [https://cloudinary.com/]()
+ > Images are stored using a third-party cloud service, [Cloudinary](https://cloudinary.com/)
 
 5. **Start the server**
 
@@ -98,8 +99,8 @@ Cloudinary Link: [https://cloudinary.com/]()
 # Contributors
 
 - [Shubham Singodiya](https://github.com/singodiyashubham87) (Designer & Frontend Developer)
-- [Abdul Rehan](https://github.com/abrehan2) (FullStack Developer)
-- [Kailash Choudhary](https://github.com/kailashchoudhary11) (FullStack Developer)
+- [Abdul Rehan](https://github.com/abrehan2) (Full-Stack Developer)
+- [Kailash Choudhary](https://github.com/kailashchoudhary11) (Full-Stack Developer)
 - [Vidip Ghosh](https://github.com/Vidip-Ghosh) (Frontend Developer)
 
 # License
