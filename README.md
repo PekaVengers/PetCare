@@ -1,4 +1,6 @@
-![1706539901084](./client/src/assets/images/logo.png)
+<div align="center">
+  <img src="./client/src/assets/images/logo.png" alt="Pet Care Logo"/>
+</div>
 
 # PetCare
 
@@ -6,11 +8,11 @@ PetCare is a project aimed at providing comprehensive care for your beloved pets
 
 # Demo
 
-Frontend: [https://pet-care-nu.vercel.app]()
+Frontend: https://pet-care-nu.vercel.app
 
-Backend: [https://pet-care-iota.vercel.app]()
+Backend: https://pet-care-iota.vercel.app
 
-Figma: [https://www.figma.com/file/qyLny9fQEDsJvDN7ewkymO/PetCare-Pages?type=design&node-id=0%3A1&mode=design&t=gWCBknBpg1yyL8Gy-1]()
+Figma: https://www.figma.com/file/qyLny9fQEDsJvDN7ewkymO/PetCare-Pages?type=design&node-id=0%3A1&mode=design&t=gWCBknBpg1yyL8Gy-1
 
 # Tech Stacks
 
