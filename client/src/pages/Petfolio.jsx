@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useNavigate, useParams } from "react-router-dom";
 import DarkButton from "../components/buttons/DarkButton";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Petfolio() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function Petfolio() {
           console.log(pet);
           setPetDetails(pet.pet);
           if (!pet.success) {
-            alert("Pet Not Found!");
+            toast.error("Pet not found.");
           }
           setDataFetched(true);
           setIsAvailableForBorrow(petDetails.availableForBorrow);
@@ -179,6 +180,7 @@ export default function Petfolio() {
           styles="text-[4rem] inline"
         />
       )}
+      <ToastContainer position="top-center" />
     </>
   );
 }
