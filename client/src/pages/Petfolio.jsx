@@ -4,9 +4,11 @@ import { useAuth } from "../contexts/AuthContext";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useParams } from "react-router-dom";
 import DarkButton from "../components/buttons/DarkButton";
+import Loader from "../components/Loader"
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Petfolio() {
+  const [loader, setLoader] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [petId, setPetId] = useState(useParams().petId);
   const [adopterMessage, setAdopterMessage] = useState("");
@@ -25,6 +27,7 @@ export default function Petfolio() {
 
   useEffect(() => {
     if (isLoggedIn) {
+      setLoader(true);
       const fetchPetDetails = async () => {
         const token = localStorage.getItem("token");
         try {
@@ -46,6 +49,7 @@ export default function Petfolio() {
         } catch (e) {
           console.error("Error while fetching single pet details", e.message);
         }
+        setLoader(false);
       };
       fetchPetDetails();
     }
@@ -169,6 +173,9 @@ export default function Petfolio() {
         />
       )}
       <ToastContainer position="top-center" />
+      {
+        loader && <Loader/>
+      }
     </>
   );
 }
