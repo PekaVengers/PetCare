@@ -20,7 +20,7 @@ const PetCard = (props) => {
             </h2>
           </div>
         </div>
-        <h2 className="dateRange font-primary text-[1.3rem] px-4 text-center">{ownerMessage?ownerMessage:""}</h2>
+        <h2 className="dateRange w-[90%] font-primary text-[1.3rem] px-4 text-center overflow-auto">{ownerMessage?ownerMessage:""}</h2>
         <div className="buttons flex justify-between gap-[3rem]">
           <DarkButton buttonText="More Details" />
           <YellowButton buttonText="Adopt Now" />
