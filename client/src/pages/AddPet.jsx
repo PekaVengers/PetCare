@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { petBreeds } from "../constants/config";
 import { BASE_URL } from "../utils/BASE_URL";
+import { ToastContainer, toast } from 'react-toastify';
 
 // eslint-disable-next-line react/prop-types
 export default function AddPet() {
@@ -94,9 +95,7 @@ export default function AddPet() {
       Object.entries(form).filter(([, value]) => value)
     );
     console.log(bodyData);
-
     if (updatePet) {
-      console.log("Update");
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${BASE_URL}/user/pet/${petId}`, {
@@ -123,7 +122,7 @@ export default function AddPet() {
         const data = await res.json();
         console.log(data);
         if (data.success) {
-          alert("Pet updated successfully");
+          toast.success("Pet Updated Successfully!")
           localStorage.removeItem("updatePet");
           localStorage.removeItem("petId");
           setUpdatePet(false);
@@ -132,7 +131,6 @@ export default function AddPet() {
         console.error("Error in posting data to server: ", e.message);
       }
     } else {
-      console.log("Not Update");
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${BASE_URL}/create`, {
@@ -159,7 +157,7 @@ export default function AddPet() {
         const data = await res.json();
         console.log(data);
         if (data.success) {
-          alert("Pet added successfully");
+          toast.success("Pet added successfully.");
         }
       } catch (e) {
         console.error("Error in posting data to server: ", e.message);
@@ -172,6 +170,7 @@ export default function AddPet() {
   }, [updatePet]);
 
   return (
+    <>
     <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem] pt-[8rem] pb-[5rem]">
       <SectionHeading heading="Add Pet" styles="text-[4rem]" />
       {formOne ? (
@@ -357,5 +356,7 @@ export default function AddPet() {
         </form>
       )}
     </div>
+    <ToastContainer position="top-center"/>
+    </>
   );
 }

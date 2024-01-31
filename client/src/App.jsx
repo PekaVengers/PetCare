@@ -3,22 +3,19 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Register, { action as registerAction } from "./pages/Register";
 import Login from "./pages/Login";
-import Profile, { loader as profileLoader } from "./pages/Profile";
+import Profile from "./pages/Profile";
 import AddPet from "./pages/AddPet";
-import { action as borrowAction } from "./components/BorrowCard";
 import Petfolio from "./pages/Petfolio";
-import Error from "./pages/Error"
+import Error from "./pages/Error";
 import PetsList from "./pages/PetsList";
-import OpenForBorrow, {
-  action as openBorrowAction,
-} from "./pages/OpenForBorrow";
 import { AuthProvider } from "./contexts/AuthContext";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <Error/>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -36,25 +33,18 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-        loader: profileLoader,
       },
       {
         path: "add-pet",
         element: <AddPet />,
       },
       {
-        action: borrowAction,
         path: "pets",
         element: <PetsList />,
       },
       {
         path: "pets/:petId",
         element: <Petfolio />,
-      },
-      {
-        action: openBorrowAction,
-        path: "open-borrow/:id",
-        element: <OpenForBorrow />,
       },
     ],
   },

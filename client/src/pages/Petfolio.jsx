@@ -2,11 +2,13 @@ import SectionHeading from "../components/SectionHeading";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { BASE_URL } from "../utils/BASE_URL";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DarkButton from "../components/buttons/DarkButton";
+import Loader from "../components/Loader"
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Petfolio() {
-  const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [petId, setPetId] = useState(useParams().petId);
   const [adopterMessage, setAdopterMessage] = useState("");
@@ -25,6 +27,7 @@ export default function Petfolio() {
 
   useEffect(() => {
     if (isLoggedIn) {
+      setLoader(true);
       const fetchPetDetails = async () => {
         const token = localStorage.getItem("token");
         try {
@@ -39,13 +42,14 @@ export default function Petfolio() {
           console.log(pet);
           setPetDetails(pet.pet);
           if (!pet.success) {
-            alert("Pet Not Found!");
+            toast.error("Pet not found.");
           }
           setDataFetched(true);
           setIsAvailableForBorrow(petDetails.availableForBorrow);
         } catch (e) {
           console.error("Error while fetching single pet details", e.message);
         }
+        setLoader(false);
       };
       fetchPetDetails();
     }
@@ -77,16 +81,10 @@ export default function Petfolio() {
         }),
       });
       const data = await res.json();
-      data.success && alert("Adoption Request Sent Successfully!");
+      data.success && toast.success("Adoption Request Sent Successfully!");
     } catch (e) {
       console.error("Error while fetching single pet details", e.message);
     }
-  };
-
-  const updatePetHandler = async () => {
-    localStorage.setItem("updatePet", "true");
-    localStorage.setItem("petId", petId);
-    navigate("/add-pet");
   };
 
   const adoptNowHandler = async () => {
@@ -135,11 +133,6 @@ export default function Petfolio() {
                   </div>
                 </div>
                 <div className="buttons flex justify-between gap-[2rem]">
-                  <DarkButton
-                    onclick={updatePetHandler}
-                    buttonText="Update Pet"
-                    styles="bg-[#F8AA26] text-[1rem] px-[2.5rem] py-[0.2rem] text-black"
-                  />
                   {availableForBorrow ? (
                     <DarkButton
                       buttonText="Adopt Now"
@@ -179,6 +172,10 @@ export default function Petfolio() {
           styles="text-[4rem] inline"
         />
       )}
+      <ToastContainer position="top-center" />
+      {
+        loader && <Loader/>
+      }
     </>
   );
 }
