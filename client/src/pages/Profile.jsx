@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Profile() {
   const [receivedRequests, setReceivedRequests] = useState([]);
@@ -40,29 +41,30 @@ export default function Profile() {
   // load user's pets initially on first render
   useEffect(() => {
     if (isLoggedIn) {
-      const getUserPets = async () => {
-        setLoader(true);
-        const token = localStorage.getItem("token");
-        try {
-          const response = await fetch(BASE_URL + "/user/pets", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              accesstoken: token,
-            },
-          });
-          const data = await response.json();
-          setPets(data.pets);
-        } catch (error) {
-          console.error("Error during users pets request:", error);
-        }
-        setLoader(false);
-      };
       getUserPets();
       getReceivedRequest();
       getSentRequest();
     }
   }, [isLoggedIn]);
+
+  const getUserPets = async () => {
+    setLoader(true);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(BASE_URL + "/user/pets", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          accesstoken: token,
+        },
+      });
+      const data = await response.json();
+      setPets(data.pets);
+    } catch (error) {
+      console.error("Error during users pets request:", error);
+    }
+    setLoader(false);
+  };
 
   const getReceivedRequest = async () => {
     const token = localStorage.getItem("token");
@@ -80,7 +82,7 @@ export default function Profile() {
         setReceivedRequests(data.request);
       }
     } catch (e) {
-      console.error("Error in receiving request: ", e.message);
+      console.error("Error in receiving requests: ", e.message);
     }
   };
 
@@ -100,7 +102,28 @@ export default function Profile() {
         setSentRequests(data.request);
       }
     } catch (e) {
-      console.error("Error in receiving request: ", e.message);
+      console.error("Error in sent requests: ", e.message);
+    }
+  };
+
+  const deletePetHandler = async (id) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`${BASE_URL}/user/pet/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          accesstoken: token,
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.success) {
+        toast.success("Pet Deleted Successfully.");
+        getUserPets();
+      }
+    } catch (e) {
+      console.error("Error in deleting pet: ", e.message);
     }
   };
 
@@ -126,8 +149,6 @@ export default function Profile() {
       {pets && (
         <div className="w-full min-h-screen pt-[10rem] pb-[5rem] bg-[#FEFFC0] flex flex-col items-center">
           <SectionHeading heading="Profile" />
-          <button onClick={getReceivedRequest}>Received Requests</button>
-          <button onClick={getSentRequest}>Sent Requests</button>
           <div className="rounded-[3rem] bg-[#F8AA26] relative pb-[0.5rem] pr-[0.5rem] mb-[1rem]">
             <div className="py-[1.5rem] px-[2rem] rounded-[3rem] bg-[#EEF3FF] border-t-2 border-l-2 border-[#0B0019] flex flex-col gap-[1rem] items-center">
               <img src={avatar} alt="pet_profile" className="w-[6rem]" />
@@ -156,13 +177,20 @@ export default function Profile() {
                     <h2 className="relative text-[3rem] font-primary uppercase font-bold my-[1rem]">
                       Received Requests
                     </h2>
-                    <div className="details">
+                    <div className="details flex flex-col gap-2">
                       <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
                         Name: {request?.adopter?.name}
                       </h1>
                       <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
                         Email: {request?.adopter?.email}
                       </h1>
+                      <div className="buttons flex w-full justify-around mt-4">
+                        <DarkButton
+                          buttonText="Accept"
+                          styles={"bg-green-500 text-black"}
+                        />
+                        <DarkButton buttonText="Reject" styles={"bg-red-500"} />
+                      </div>
                     </div>
                   </div>
                 </>
@@ -182,6 +210,12 @@ export default function Profile() {
                       <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
                         Email: {request?.petOwner?.email}
                       </h1>
+                      <div className="buttons flex w-full justify-center mt-4">
+                        <DarkButton
+                          buttonText="Delete"
+                          styles={"bg-yellow-500 text-black"}
+                        />
+                      </div>
                     </div>
                   </div>
                 </>
@@ -219,10 +253,12 @@ export default function Profile() {
                       </div>
                     </div>
                     <div className="buttons flex justify-between gap-[2rem]">
-                      <DarkButton
-                        buttonText="Delete Pet"
-                        styles="bg-red-600 text-[1.2rem] px-[1.5rem] py-[0.2rem]"
-                      />
+                      <button
+                        className={`text-[1.2rem] uppercase font-bold px-[3rem] py-[0.5rem] font-primary text-white rounded-[2rem] hover:bg-[#DFE8FD] hover:text-[#0B0019] border-2 border-[#0B0019] bg-red-500 px-[1.5rem] py-[0.2rem]`}
+                        onClick={() => deletePetHandler(_id)}
+                      >
+                        Delete Pet
+                      </button>
                       <button
                         className={`text-[1.2rem] uppercase font-bold px-[3rem] py-[0.5rem] font-primary text-[#DFE8FD] rounded-[2rem] hover:bg-[#DFE8FD] hover:text-[#0B0019] border-2 border-[#0B0019] bg-[#F8AA26] px-[1.5rem] py-[0.2rem] text-black`}
                         onClick={() => updatePetHandler(_id)}
@@ -237,6 +273,7 @@ export default function Profile() {
           </div>
         </div>
       )}
+      <ToastContainer position="top-center" />
     </>
   );
 }
