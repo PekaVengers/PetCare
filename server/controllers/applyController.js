@@ -53,7 +53,6 @@ const emailContext = (val, subject, name, petName, petType, status) => {
 
 // CREATE AN ADOPTION REQUEST -
 exports.createRequest = AsyncErr(async (req, res, next) => {
-  console.log(req.body);
   const { petId, message } = req.body;
 
   if (!message) {
@@ -107,24 +106,24 @@ exports.createRequest = AsyncErr(async (req, res, next) => {
   });
 });
 
-// GET ALL ADOPTION REQUESTS FOR OWNER -
+// GET ALL ADOPTION REQUESTS FOR OWNER - Received requests
 exports.getOwnerRequests = AsyncErr(async (req, res, next) => {
   const request = await applyModel
     .find({ petOwner: req.user.id })
     .populate("adopter")
-    .limit(1);
+    .limit(3);
   res.status(200).json({
     success: true,
     request,
   });
 });
 
-// GET ALL ADOPTION REQUESTS FOR ADOPTER -
+// GET ALL ADOPTION REQUESTS FOR ADOPTER - Sent requests
 exports.getAdopterRequests = AsyncErr(async (req, res, next) => {
   const request = await applyModel
     .find({ adopter: req.user.id })
     .populate("petOwner")
-    .limit(1);
+    .limit(2);
   res.status(200).json({
     success: true,
     request,
@@ -141,6 +140,7 @@ exports.updateReqStatus = AsyncErr(async (req, res, next) => {
     );
   }
 
+  console.log(status);
   const request = await applyModel
     .findOne({ petOwner: req.user.id })
     .populate("adopter", "name email");

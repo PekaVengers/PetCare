@@ -106,6 +106,32 @@ export default function Profile() {
     }
   };
 
+  const requestUpdateHandler = async (statusValue) => {
+    setLoader(true);
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`${BASE_URL}/owner/request/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accesstoken: token,
+        },
+        body: JSON.stringify({
+          status: statusValue,
+        }),
+      });
+      const data = await res.json();
+      console.log(data.request);
+      if (data.success) {
+        setSentRequests(data.request);
+      }
+    } catch (e) {
+      console.error("Error in sent requests: ", e.message);
+    } finally {
+      setLoader(false);
+    }
+  };
+
   const deletePetHandler = async (id) => {
     const token = localStorage.getItem("token");
     try {
@@ -190,8 +216,13 @@ export default function Profile() {
                       <DarkButton
                         buttonText="Accept"
                         styles={"bg-green-500 text-black"}
+                        onclick={() => requestUpdateHandler("accept")}
                       />
-                      <DarkButton buttonText="Reject" styles={"bg-red-500"} />
+                      <DarkButton
+                        buttonText="Reject"
+                        styles={"bg-red-500"}
+                        onclick={() => requestUpdateHandler("reject")}
+                      />
                     </div>
                   </div>
                 </div>
