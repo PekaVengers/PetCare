@@ -36,6 +36,7 @@ export default function Login() {
         localStorage.setItem("location", data.user.location);
         localStorage.setItem("phoneNo", data.user.phoneNo);
         localStorage.setItem("isLoggedIn", "true");
+        toast.success("Login Successful!");
         navigate("/profile");
       } else {
         toast.error("Invalid credentials!");
@@ -47,6 +48,7 @@ export default function Login() {
 
   return (
     <>
+      <ToastContainer position="top-center" />
       <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center">
         <SectionHeading heading="Login" styles="text-[4rem]" />
         <form
@@ -82,7 +84,6 @@ export default function Login() {
           </button>
         </form>
       </div>
-      <ToastContainer position="top-center" />
     </>
   );
 }

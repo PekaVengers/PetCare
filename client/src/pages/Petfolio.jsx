@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useParams } from "react-router-dom";
 import DarkButton from "../components/buttons/DarkButton";
-import Loader from "../components/Loader"
+import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Petfolio() {
@@ -67,6 +67,7 @@ export default function Petfolio() {
   );
 
   const adoptPet = async (msg) => {
+    setLoader(true);
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(`${BASE_URL}/adopt`, {
@@ -84,12 +85,14 @@ export default function Petfolio() {
       data.success && toast.success("Adoption Request Sent Successfully!");
     } catch (e) {
       console.error("Error while fetching single pet details", e.message);
+    } finally {
+      setLoader(false);
     }
   };
 
   const adoptNowHandler = async () => {
     const message = prompt("Enter a message for the pet owner: ");
-      adoptPet(message);
+    adoptPet(message);
   };
 
   return (
@@ -172,9 +175,7 @@ export default function Petfolio() {
         />
       )}
       <ToastContainer position="top-center" />
-      {
-        loader && <Loader/>
-      }
+      {loader && <Loader />}
     </>
   );
 }
