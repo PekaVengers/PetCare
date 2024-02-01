@@ -59,6 +59,7 @@ export default function PetsList() {
               ownerMessage,
               startDate,
               endDate,
+              profile
             }) => {
               return (
                 <>
@@ -79,6 +80,7 @@ export default function PetsList() {
                         ? endDate.slice(0, 10).split("-").join("/")
                         : "25/01/2000"
                     }
+                    profile={profile}
                   />
                 </>
               );

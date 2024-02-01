@@ -11,7 +11,7 @@ export default function Petfolio() {
   const [loader, setLoader] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [petId, setPetId] = useState(useParams().petId);
-  const [adopterMessage, setAdopterMessage] = useState("");
+  // const [adopterMessage, setAdopterMessage] = useState("");
   const [petDetails, setPetDetails] = useState({});
   const [dataFetched, setDataFetched] = useState(false);
   const { login } = useAuth();
@@ -66,7 +66,7 @@ export default function Petfolio() {
     </h2>
   );
 
-  const adoptPet = async () => {
+  const adoptPet = async (msg) => {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(`${BASE_URL}/adopt`, {
@@ -77,7 +77,7 @@ export default function Petfolio() {
         },
         body: JSON.stringify({
           petId: petId,
-          message: adopterMessage,
+          message: msg,
         }),
       });
       const data = await res.json();
@@ -89,8 +89,7 @@ export default function Petfolio() {
 
   const adoptNowHandler = async () => {
     const message = prompt("Enter a message for the pet owner: ");
-    setAdopterMessage(message);
-    adoptPet();
+      adoptPet(message);
   };
 
   return (
