@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        'custom': '5px 10px #F8AA26',
+      },
       colors: {
         primary: '#00FCED',
         secondary: '#92EEE8',
@@ -11,7 +14,8 @@ export default {
         primary: 'Quicksand',
       },
       screens: {
-        'xxl': '1751px',
+        '4xl': '1801px',
+        '3xl': '1751px',
         'mmd': '851px',
         'gsm': '571px',
         'msm': '491px',

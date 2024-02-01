@@ -145,7 +145,7 @@ export default function Petfolio() {
                 </div>
               </div>
             </div>
-            <h2 className="p-2 px-4 rounded-[1rem] text-[1.7rem] font-primary text-[#EAA124] bg-[#0B0019]">
+            <h2 className="p-2 px-4 rounded-[1rem] text-[1.7rem] font-primary text-[#EAA124] bg-[#0B0019] overflow-auto max-w-[90%] ">
               <strong className="font-semibold uppercase text-[#EEF3FF]">
                 {"Precautions: "}
               </strong>
