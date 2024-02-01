@@ -18,13 +18,13 @@ body{
 }
 
 ::-webkit-scrollbar{
+    background-color: #ffcb72;
     width: 0.4rem;
-    background-color: #F8AA26;
     border-radius: 1rem;
 }
 
 ::-webkit-scrollbar-thumb{
-    background-color: #ffcb72;
+    background-color: #F8AA26;
     border-radius: 1rem;
 }
 

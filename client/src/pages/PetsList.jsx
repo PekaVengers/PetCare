@@ -14,9 +14,9 @@ export default function PetsList() {
 
   const { isLoggedIn, login } = useAuth();
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.getItem("token") && login();
-  },[login])
+  }, [login]);
 
   // Get All pets
   useEffect(() => {
@@ -59,30 +59,28 @@ export default function PetsList() {
               ownerMessage,
               startDate,
               endDate,
-              profile
+              profile,
             }) => {
               return (
-                <>
-                  <PetCard
-                    key={_id}
-                    petId={_id}
-                    petName={petName}
-                    category={petType}
-                    breed={petBreed}
-                    ownerMessage={ownerMessage || ""}
-                    startDate={
-                      startDate
-                        ? startDate.slice(0, 10).split("-").join("/")
-                        : "15/01/2000"
-                    }
-                    endDate={
-                      endDate
-                        ? endDate.slice(0, 10).split("-").join("/")
-                        : "25/01/2000"
-                    }
-                    profile={profile}
-                  />
-                </>
+                <PetCard
+                  key={_id}
+                  petId={_id}
+                  petName={petName}
+                  category={petType}
+                  breed={petBreed}
+                  ownerMessage={ownerMessage || ""}
+                  startDate={
+                    startDate
+                      ? startDate.slice(0, 10).split("-").join("/")
+                      : "15/01/2000"
+                  }
+                  endDate={
+                    endDate
+                      ? endDate.slice(0, 10).split("-").join("/")
+                      : "25/01/2000"
+                  }
+                  profile={profile}
+                />
               );
             }
           )}
