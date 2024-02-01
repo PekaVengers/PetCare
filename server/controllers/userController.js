@@ -32,6 +32,8 @@ exports.registerUser = AsyncErr(async (req, res, next) => {
 exports.loginUser = AsyncErr(async (req, res, next) => {
   const { email, password } = req.body;
 
+  console.log(email, password);
+
   // FILLING ALL THE FIELDS -
   if (!email || !password) {
     return next(new ErrorHandler("Please fill all the fields", 400));
