@@ -109,7 +109,10 @@ exports.createRequest = AsyncErr(async (req, res, next) => {
 
 // GET ALL ADOPTION REQUESTS FOR OWNER -
 exports.getOwnerRequests = AsyncErr(async (req, res, next) => {
-  const request = await applyModel.findOne({ petOwner: req.user.id });
+  const request = await applyModel
+    .find({ petOwner: req.user.id })
+    .populate("adopter")
+    .limit(1);
   res.status(200).json({
     success: true,
     request,
@@ -118,7 +121,10 @@ exports.getOwnerRequests = AsyncErr(async (req, res, next) => {
 
 // GET ALL ADOPTION REQUESTS FOR ADOPTER -
 exports.getAdopterRequests = AsyncErr(async (req, res, next) => {
-  const request = await applyModel.findOne({ adopter: req.user.id });
+  const request = await applyModel
+    .find({ adopter: req.user.id })
+    .populate("petOwner")
+    .limit(1);
   res.status(200).json({
     success: true,
     request,

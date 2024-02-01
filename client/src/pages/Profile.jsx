@@ -6,9 +6,11 @@ import SectionHeading from "../components/SectionHeading";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from "../contexts/AuthContext";
-import Loader from "../components/Loader"
+import Loader from "../components/Loader";
 
 export default function Profile() {
+  const [receivedRequests, setReceivedRequests] = useState([]);
+  const [sentRequests, setSentRequests] = useState([]);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -57,8 +59,50 @@ export default function Profile() {
         setLoader(false);
       };
       getUserPets();
+      getReceivedRequest();
+      getSentRequest();
     }
   }, [isLoggedIn]);
+
+  const getReceivedRequest = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`${BASE_URL}/owner/requests`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          accesstoken: token,
+        },
+      });
+      const data = await res.json();
+      console.log(data.request);
+      if (data.success) {
+        setReceivedRequests(data.request);
+      }
+    } catch (e) {
+      console.error("Error in receiving request: ", e.message);
+    }
+  };
+
+  const getSentRequest = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`${BASE_URL}/adopter/requests`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          accesstoken: token,
+        },
+      });
+      const data = await res.json();
+      console.log(data.request);
+      if (data.success) {
+        setSentRequests(data.request);
+      }
+    } catch (e) {
+      console.error("Error in receiving request: ", e.message);
+    }
+  };
 
   // If user is not logged in then early return
   if (!isLoggedIn) {
@@ -78,12 +122,12 @@ export default function Profile() {
 
   return (
     <>
-    {
-      loader && <Loader/>
-    }
+      {loader && <Loader />}
       {pets && (
         <div className="w-full min-h-screen pt-[10rem] pb-[5rem] bg-[#FEFFC0] flex flex-col items-center">
           <SectionHeading heading="Profile" />
+          <button onClick={getReceivedRequest}>Received Requests</button>
+          <button onClick={getSentRequest}>Sent Requests</button>
           <div className="rounded-[3rem] bg-[#F8AA26] relative pb-[0.5rem] pr-[0.5rem] mb-[1rem]">
             <div className="py-[1.5rem] px-[2rem] rounded-[3rem] bg-[#EEF3FF] border-t-2 border-l-2 border-[#0B0019] flex flex-col gap-[1rem] items-center">
               <img src={avatar} alt="pet_profile" className="w-[6rem]" />
@@ -103,7 +147,48 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <h2 className="relative text-[4rem] font-primary uppercase font-bold my-[1rem]">
+
+          <div className="requests flex flex-col gap-4 items-stretch justify-center my-8">
+            {receivedRequests &&
+              receivedRequests.map((request) => (
+                <>
+                  <div className="received px-8 py-4 rounded-[2rem] flex flex-col items-center justify-center border-2 border-black">
+                    <h2 className="relative text-[3rem] font-primary uppercase font-bold my-[1rem]">
+                      Received Requests
+                    </h2>
+                    <div className="details">
+                      <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
+                        Name: {request?.adopter?.name}
+                      </h1>
+                      <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
+                        Email: {request?.adopter?.email}
+                      </h1>
+                    </div>
+                  </div>
+                </>
+              ))}
+
+            {sentRequests &&
+              sentRequests.map((request) => (
+                <>
+                  <div className="sent px-8 py-4 rounded-[2rem] border-2 border-black flex flex-col items-center justify-center">
+                    <h2 className="relative text-[3rem] font-primary uppercase font-bold my-[1rem]">
+                      Sent Requests
+                    </h2>
+                    <div className="details">
+                      <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
+                        Name: {request?.petOwner?.name}
+                      </h1>
+                      <h1 className="petName uppercase font-bold font-primary text-[2rem] leading-[2.5rem]">
+                        Email: {request?.petOwner?.email}
+                      </h1>
+                    </div>
+                  </div>
+                </>
+              ))}
+          </div>
+
+          <h2 className="relative text-[3rem] font-primary uppercase font-bold my-[1rem]">
             Your Pets
           </h2>
           <Link to="/add-pet">
@@ -140,7 +225,7 @@ export default function Profile() {
                       />
                       <button
                         className={`text-[1.2rem] uppercase font-bold px-[3rem] py-[0.5rem] font-primary text-[#DFE8FD] rounded-[2rem] hover:bg-[#DFE8FD] hover:text-[#0B0019] border-2 border-[#0B0019] bg-[#F8AA26] px-[1.5rem] py-[0.2rem] text-black`}
-                        onClick={()=>updatePetHandler(_id)}
+                        onClick={() => updatePetHandler(_id)}
                       >
                         Update Pet
                       </button>
