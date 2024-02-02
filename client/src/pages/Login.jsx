@@ -3,9 +3,12 @@ import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import useOnline from "../hooks/useOnline";
+import Offline from "../components/Offline";
 
 // eslint-disable-next-line no-unused-vars, react-refresh/only-export-components
 export default function Login() {
+  const online = useOnline();
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -45,6 +48,10 @@ export default function Login() {
       console.error("Error during login request:", error);
     }
   };
+
+  if (!online) {
+    return <Offline />;
+  }
 
   return (
     <>
