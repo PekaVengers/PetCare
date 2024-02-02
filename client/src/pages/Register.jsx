@@ -1,6 +1,6 @@
 import { BASE_URL } from "../utils/BASE_URL";
 import isStrongPassword from "../utils/isStrongPassword";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import SectionHeading from "../components/SectionHeading";
 import { ToastContainer, toast } from "react-toastify";
 
