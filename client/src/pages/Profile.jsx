@@ -4,10 +4,16 @@ import DarkButton from "../components/pets/DarkButton";
 import AddPetButton from "../components/pets/DarkButton";
 import SectionHeading from "../components/SectionHeading";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  getUserPets,
+  getReceivedRequest,
+  getSentRequest,
+  requestUpdateHandler,
+  deletePetHandler,
+} from "../utils/profilePageHelpers";
 
 export default function Profile() {
   const [receivedRequests, setReceivedRequests] = useState([]);
@@ -41,117 +47,13 @@ export default function Profile() {
   // load user's pets initially on first render
   useEffect(() => {
     if (isLoggedIn) {
-      getUserPets();
-      getReceivedRequest();
-      getSentRequest();
-    }
-  }, [isLoggedIn]);
-
-  const getUserPets = async () => {
-    setLoader(true);
-    const token = localStorage.getItem("token");
-    try {
-      const response = await fetch(BASE_URL + "/user/pets", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-      });
-      const data = await response.json();
-      setPets(data.pets);
-    } catch (error) {
-      console.error("Error during users pets request:", error);
-    }
-    setLoader(false);
-  };
-
-  const getReceivedRequest = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`${BASE_URL}/owner/requests`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-      });
-      const data = await res.json();
-      console.log(data.request);
-      if (data.success) {
-        setReceivedRequests(data.request);
-      }
-    } catch (e) {
-      console.error("Error in receiving requests: ", e.message);
-    }
-  };
-
-  const getSentRequest = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`${BASE_URL}/adopter/requests`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-      });
-      const data = await res.json();
-      console.log(data.request);
-      if (data.success) {
-        setSentRequests(data.request);
-      }
-    } catch (e) {
-      console.error("Error in sent requests: ", e.message);
-    }
-  };
-
-  const requestUpdateHandler = async (statusValue) => {
-    setLoader(true);
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`${BASE_URL}/owner/request/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-        body: JSON.stringify({
-          status: statusValue,
-        }),
-      });
-      const data = await res.json();
-      console.log(data.request);
-      if (data.success) {
-        setSentRequests(data.request);
-      }
-    } catch (e) {
-      console.error("Error in sent requests: ", e.message);
-    } finally {
+      setLoader(true);
+      getUserPets(setPets);
+      getReceivedRequest(setReceivedRequests);
+      getSentRequest(setSentRequests);
       setLoader(false);
     }
-  };
-
-  const deletePetHandler = async (id) => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`${BASE_URL}/user/pet/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      if (data.success) {
-        toast.success("Pet Deleted Successfully.");
-        getUserPets();
-      }
-    } catch (e) {
-      console.error("Error in deleting pet: ", e.message);
-    }
-  };
+  }, [isLoggedIn]);
 
   // If user is not logged in then early return
   if (!isLoggedIn) {
@@ -288,7 +190,7 @@ export default function Profile() {
                       <div className="buttons flex justify-between gap-[2rem]">
                         <button
                           className={`text-[1.2rem] uppercase font-bold px-[3rem] py-[0.5rem] font-primary text-white rounded-[2rem] hover:bg-[#DFE8FD] hover:text-[#0B0019] border-2 border-[#0B0019] bg-red-500 px-[1.5rem] py-[0.2rem]`}
-                          onClick={() => deletePetHandler(_id)}
+                          onClick={() => deletePetHandler(_id, toast)}
                         >
                           Delete Pet
                         </button>
