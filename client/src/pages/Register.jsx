@@ -3,6 +3,8 @@ import isStrongPassword from "../utils/isStrongPassword";
 import { Form } from "react-router-dom";
 import SectionHeading from "../components/SectionHeading";
 import { ToastContainer, toast } from "react-toastify";
+import useOnline from "../hooks/useOnline";
+import Offline from "../components/Offline";
 
 // eslint-disable-next-line no-unused-vars, react-refresh/only-export-components
 export async function action({ request }) {
@@ -46,6 +48,11 @@ export async function action({ request }) {
 }
 
 export default function Register() {
+  const online = useOnline();
+  if (!online) {
+    return <Offline />;
+  }
+
   return (
     <>
       <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem] pt-[8rem] pb-[5rem]">

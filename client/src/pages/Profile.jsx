@@ -14,8 +14,11 @@ import ProfileCard from "../components/ProfileCard";
 import ReceivedRequests from "../components/ReceivedRequests";
 import SentRequests from "../components/SentRequests";
 import ProfilePetsList from "../components/ProfilePetsList";
+import useOnline from "../hooks/useOnline";
+import Offline from "../components/Offline";
 
 export default function Profile() {
+  const online = useOnline();
   const [receivedRequests, setReceivedRequests] = useState([]);
   const [sentRequests, setSentRequests] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -48,6 +51,10 @@ export default function Profile() {
         styles="text-center"
       ></SectionHeading>
     );
+  }
+
+  if (!online) {
+    return <Offline />;
   }
 
   return (

@@ -6,8 +6,11 @@ import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import PetBioCard from "../components/PetBioCard";
 import { fetchPetDetails } from "../utils/fetchPetDetails";
+import useOnline from "../hooks/useOnline";
+import Offline from "../components/Offline";
 
 export default function Petfolio() {
+  const online = useOnline();
   const [loader, setLoader] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [petId, setPetId] = useState(useParams().petId);
@@ -44,6 +47,10 @@ export default function Petfolio() {
       {headingText ? headingText : `${localStorage.getItem(text)}`}
     </h2>
   );
+
+  if (!online) {
+    return <Offline />;
+  }
 
   return (
     <>

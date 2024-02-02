@@ -4,9 +4,12 @@ import { petBreeds } from "../constants/config";
 import { BASE_URL } from "../utils/BASE_URL";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../components/Loader";
+import useOnline from "../hooks/useOnline";
+import Offline from "../components/Offline";
 
 // eslint-disable-next-line react/prop-types
 export default function AddPet() {
+  const online = useOnline();
   const [petId] = useState(localStorage.getItem("petId") || null);
   const [updatePet, setUpdatePet] = useState(
     localStorage.getItem("updatePet") || null
@@ -176,6 +179,10 @@ export default function AddPet() {
   useEffect(() => {
     setUpdatePet(localStorage.getItem("updatePet"));
   }, [updatePet]);
+
+  if (!online) {
+    return <Offline />;
+  }
 
   return (
     <>

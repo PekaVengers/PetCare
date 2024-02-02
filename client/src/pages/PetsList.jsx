@@ -7,8 +7,11 @@ import { useEffect, useState } from "react";
 import { pets as dummyPets } from "../constants/config";
 import { BASE_URL } from "../utils/BASE_URL";
 import Loader from "../components/Loader";
+import useOnline from "../hooks/useOnline";
+import Offline from "../components/Offline";
 
 export default function PetsList() {
+  const online = useOnline();
   const [loader, setLoader] = useState(false);
   const [pets, setPets] = useState(dummyPets);
 
@@ -39,6 +42,10 @@ export default function PetsList() {
     };
     handleAllPetsClick();
   }, []);
+
+  if (!online) {
+    return <Offline />;
+  }
 
   return (
     <>
