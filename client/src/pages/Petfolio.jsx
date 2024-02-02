@@ -1,11 +1,11 @@
 import SectionHeading from "../components/SectionHeading";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { BASE_URL } from "../utils/BASE_URL";
 import { useParams } from "react-router-dom";
-import DarkButton from "../components/buttons/DarkButton";
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
+import PetBioCard from "../components/PetBioCard";
+import { fetchPetDetails } from "../utils/fetchPetDetails";
 
 export default function Petfolio() {
   const [loader, setLoader] = useState(false);
@@ -13,7 +13,6 @@ export default function Petfolio() {
   const [petId, setPetId] = useState(useParams().petId);
   // const [adopterMessage, setAdopterMessage] = useState("");
   const [petDetails, setPetDetails] = useState({});
-  const [dataFetched, setDataFetched] = useState(false);
   const { login } = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [availableForBorrow, setIsAvailableForBorrow] = useState(false);
@@ -28,32 +27,12 @@ export default function Petfolio() {
   useEffect(() => {
     if (isLoggedIn) {
       setLoader(true);
-      const fetchPetDetails = async () => {
-        const token = localStorage.getItem("token");
-        try {
-          const res = await fetch(`${BASE_URL}/user/pet/${petId}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              accesstoken: token,
-            },
-          });
-          const pet = await res.json();
-          console.log(pet);
-          setPetDetails(pet.pet);
-          if (!pet.success) {
-            toast.error("Pet not found.");
-          }
-          setDataFetched(true);
-          setIsAvailableForBorrow(petDetails.availableForBorrow);
-        } catch (e) {
-          console.error("Error while fetching single pet details", e.message);
-        }
-        setLoader(false);
-      };
-      fetchPetDetails();
+      fetchPetDetails(petId, setPetDetails, toast);
+      setIsAvailableForBorrow(petDetails.availableForBorrow);
+      setLoader(false);
     }
-  }, [dataFetched, isLoggedIn, petDetails.availableForBorrow, petId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn, petDetails.availableForBorrow, petId]);
 
   // eslint-disable-next-line react/prop-types
   const OwnerDetails = ({ text, headingText, styles }) => (
@@ -66,85 +45,19 @@ export default function Petfolio() {
     </h2>
   );
 
-  const adoptPet = async (msg) => {
-    setLoader(true);
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`${BASE_URL}/adopt`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accesstoken: token,
-        },
-        body: JSON.stringify({
-          petId: petId,
-          message: msg,
-        }),
-      });
-      const data = await res.json();
-      data.success && toast.success("Adoption Request Sent Successfully!");
-    } catch (e) {
-      console.error("Error while fetching single pet details", e.message);
-    } finally {
-      setLoader(false);
-    }
-  };
-
-  const adoptNowHandler = async () => {
-    const message = prompt("Enter a message for the pet owner: ");
-    adoptPet(message);
-  };
-
   return (
     <>
-      {dataFetched ? (
+      {petDetails ? (
         <div className="bg-[#FEFFC0] w-full min-h-screen">
           <main className="w-[80%] xl:w-[80%] 2xl:w-[60%] mt-[10rem] mb-[5rem] flex flex-col justify-center items-center mx-auto">
             <SectionHeading heading="Petfolio" styles="inline" />
-            <div className="rounded-[3rem] bg-[#F8AA26] relative pb-[0.5rem] pr-[0.5rem] mb-[1rem]">
-              <div className="py-[1.5rem] px-[2rem] rounded-[3rem] bg-[#EEF3FF] border-t-2 border-l-2 border-[#0B0019] flex flex-col gap-[1rem] items-center">
-                <div className="rounded-[50%] w-[6rem] h-[6rem] overflow-hidden rounded-[50%] border-2 border-[#0B0019]">
-                  <img
-                    src={petDetails?.profile?.url}
-                    alt="pet_profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="petDetails flex gap-[2rem] items-center">
-                  <div className="details text-[#0B0019] font-primary flex flex-col items-center">
-                    <h1 className="petName uppercase font-bold text-[2.5rem] leading-[2.5rem]">
-                      {petDetails.petName}
-                    </h1>
-                    <h2 className="dateRange font-semibold text-[1.5rem] opacity-[0.8]">
-                      {`${petDetails.petAge} Years, ${petDetails.petGender}`}
-                    </h2>
-                    <h3 className="dateRange font-semibold text-[1.3rem] opacity-[0.7]">
-                      {`${petDetails.petType}, ${petDetails.petBreed}`}
-                    </h3>
-                    {availableForBorrow && (
-                      <h3 className="breed text-[1.2rem] opacity-[0.8]">
-                        {`${petDetails.startDate
-                          .slice(0, 10)
-                          .split("-")
-                          .join("/")} - ${petDetails.endDate
-                          .slice(0, 10)
-                          .split("-")
-                          .join("/")}`}
-                      </h3>
-                    )}
-                  </div>
-                </div>
-                <div className="buttons flex justify-between gap-[2rem]">
-                  {availableForBorrow ? (
-                    <DarkButton
-                      buttonText="Adopt Now"
-                      styles="text-[1rem] px-[2.5rem] py-[0.2rem]"
-                      onclick={adoptNowHandler}
-                    />
-                  ) : null}
-                </div>
-              </div>
-            </div>
+            <PetBioCard
+              petDetails={petDetails}
+              petId={petId}
+              toast={toast}
+              availableForBorrow={availableForBorrow}
+              setLoader={setLoader}
+            />
             <h2 className="p-2 px-4 rounded-[1rem] text-[1.7rem] font-primary text-[#EAA124] bg-[#0B0019] overflow-auto max-w-[90%] ">
               <strong className="font-semibold uppercase text-[#EEF3FF]">
                 {"Precautions: "}
@@ -170,8 +83,8 @@ export default function Petfolio() {
         </div>
       ) : (
         <SectionHeading
-          heading="Login to continue..."
-          styles="text-[4rem] inline"
+          heading="Error in fetching pet data..."
+          styles="text-[3rem] inline"
         />
       )}
       <ToastContainer position="top-center" />
