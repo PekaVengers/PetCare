@@ -49,7 +49,7 @@ export default function PetsList() {
             <DarkButton buttonText="Add your pet" />
           </Link>
         )}
-        <div className="pets mt-[5rem] mb-[3rem] max-w-[90%] flex flex-wrap gap-x-[3rem] gap-y-[2rem] items-stretch justify-center border-2 border-black">
+        <div className="pets mt-[5rem] mb-[3rem] max-w-[90%] flex flex-wrap gap-x-[3rem] gap-y-[2rem] items-stretch justify-center">
           {pets.map(
             ({
               _id,
