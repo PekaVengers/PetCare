@@ -190,3 +190,19 @@ exports.updateReqStatus = AsyncErr(async (req, res, next) => {
     message: "The request has been updated",
   });
 });
+
+// DELETE AN APPLIED REQUEST -
+exports.deletePetRequest = AsyncErr(async (req, res, next) => {
+  const request = await applyModel.findById(req.params.id);
+
+  if (!request) {
+    return next(new ErrorHandler("Request not found", 404));
+  }
+
+  await request.deleteOne();
+
+  res.status(200).json({
+    success: true,
+    message: "The request has been deleted",
+  });
+});
