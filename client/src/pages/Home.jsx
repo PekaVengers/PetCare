@@ -2,14 +2,17 @@ import Banner from "../assets/images/banner2.png";
 import Hero from "../components/homepage/Hero";
 import CTA from "../components/homepage/CTA";
 import Testimonial from "../components/homepage/Testimonial";
+import Heading from "../components/homepage/Heading";
 import useOnline from "../hooks/useOnline";
-import Offline from "../components/Offline"
+import Offline from "../components/Offline";
 
 export default function Home() {
   const online = useOnline();
   if (!online) {
     return <Offline />;
   }
+
+
   return (
     <div className="w-full min-h-screen bg-[#FEFFC0] relative">
       <div className="w-full">
@@ -19,18 +22,12 @@ export default function Home() {
           className="w-full h-full object-cover"
         />
       </div>
-      <main className="xl:w-[80%] 2xl:w-[60%] m-auto">
-        <h1 className="uppercase font-primary text-[4rem] text-center font-semibold mt-[5rem]">
-          Our Vision
-        </h1>
+      <main className="lg:w-[100%] xl:w-[90%] 2xl:w-[70%] 3xl:w-[60%] 4xl:w-[55%] m-auto">
+        <Heading text={"Our Vision"} />
         <Hero />
-        <h1 className="uppercase font-primary mb-[2rem] text-[4rem] text-center font-semibold">
-          Call To Action
-        </h1>
+        <Heading text={"Call To Action"} styles=""/>
         <CTA />
-        <h1 className="uppercase font-primary my-[2rem] text-[4rem] text-center font-semibold">
-          Testimonial
-        </h1>
+        <Heading text={"Testimonial"} />
         <Testimonial />
       </main>
     </div>
