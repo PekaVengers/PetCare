@@ -2,19 +2,42 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { useAuth } from "../contexts/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
+import { IoMenu } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(true);
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
 
+  function toggleMenu() {
+    setMenuOpen(!menuOpen);
+  }
+
   return (
     <>
-      <nav className="bg-transparent p-4 font-primary uppercase absolute top-0 w-full z-10">
-        <div className="container mx-auto flex items-center text-[1.3rem] justify-between text-[#080909] font-semibold">
-          <NavLink to="/" className="text-[1.5rem] font-semibold">
-            <img src={logo} alt="logo" className="w-[6rem] h-[6rem]" />
-          </NavLink>
-          <div className="flex space-x-4 justify-center items-center">
+      <nav className={`md:bg-transparent p-2 md:p-4 font-primary uppercase absolute top-0 w-full z-10 ${menuOpen?"bg-[#F8AA26]":"bg-transparent"}`}>
+        <div className="container min-w-[98%] flex flex-col justify-around items-center md:flex-row md:text-[1.3rem] md:justify-between text-[#080909] font-semibold mx-auto ease-in duration-300">
+          <div className="logoIconContainer flex w-full justify-between items-center">
+            <NavLink to="/" className="text-[1.5rem] font-semibold">
+              <img
+                src={logo}
+                alt="logo"
+                className="w-[3rem] h-[3rem] md:w-[6rem] md:h-[6rem]"
+              />
+            </NavLink>
+            {!menuOpen ? (
+              <IoMenu onClick={() => toggleMenu()} className="text-[1.5rem]" />
+            ) : (
+              <RxCross1
+                onClick={() => toggleMenu()}
+                className="text-[1.5rem]"
+              />
+            )}
+          </div>
+
+          <div className={`${menuOpen?"block":"hidden"} pt-2 flex flex-col md:flex-row w-full md:w-fit md:bg-transparent md:space-x-4 md:justify-center md:items-center gap-2 text-right ease-in duration-300`}>
             <NavLink to="/pets">Pets</NavLink>
             {isLoggedIn ? (
               <>
