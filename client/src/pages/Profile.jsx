@@ -10,10 +10,10 @@ import {
   getReceivedRequest,
   getSentRequest,
 } from "../utils/profilePageHelpers";
-import ProfileCard from "../components/ProfileCard";
-import ReceivedRequests from "../components/ReceivedRequests";
-import SentRequests from "../components/SentRequests";
-import ProfilePetsList from "../components/ProfilePetsList";
+import ProfileCard from "../components/profile/ProfileCard";
+import ReceivedRequests from "../components/profile/ReceivedRequests";
+import SentRequests from "../components/profile/SentRequests";
+import ProfilePetsList from "../components/profile/ProfilePetsList";
 import useOnline from "../hooks/useOnline";
 import Offline from "../components/Offline";
 
@@ -65,7 +65,7 @@ export default function Profile() {
           <SectionHeading heading="Profile" />
           <ProfileCard />
 
-          <div className="requests flex flex-col gap-4 items-stretch justify-center my-8">
+          <div className="requests w-[90%] md:w-[80%] xl:w-[65%] 2xl:w-[60%] 3xl:w-[50%] flex md:flex-wrap md:flex-row flex-col gap-4 items-stretch justify-center my-8">
             {receivedRequests &&
               receivedRequests.map((request) => (
                 <ReceivedRequests request={request} key={request?._id} />
@@ -83,10 +83,10 @@ export default function Profile() {
 
           {pets && (
             <>
-              <h2 className="relative text-[3rem] font-primary uppercase font-bold my-[1rem]">
+              <h2 className="relative text-[2.5rem] vsm:text-[3rem] font-primary uppercase font-bold my-[1rem]">
                 Your Pets
               </h2>
-              <div className="pets mt-[2rem] w-[70%] flex flex-wrap justify-center gap-x-[2rem] gap-y-[3rem]">
+              <div className="pets mt-[2rem] w-full md:w-[70%] flex flex-wrap justify-center gap-x-[2rem] gap-y-[3rem]">
                 {pets.map(
                   ({ _id, profile, petName, petType, petBreed, petAge }) => (
                     <ProfilePetsList
