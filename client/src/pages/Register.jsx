@@ -1,6 +1,8 @@
 import { BASE_URL } from "../utils/BASE_URL";
 import isStrongPassword from "../utils/isStrongPassword";
 import { Form } from "react-router-dom";
+import Input from "../components/register/Input";
+import Label from "../components/register/Label";
 import SectionHeading from "../components/SectionHeading";
 import { ToastContainer, toast } from "react-toastify";
 import useOnline from "../hooks/useOnline";
@@ -55,80 +57,36 @@ export default function Register() {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center gap-[1rem] pt-[8rem] pb-[5rem]">
-        <SectionHeading heading="Register" styles="text-[4rem]" />
+      <div className="w-full min-h-screen bg-[#FEFFC0] flex flex-col justify-center items-center md:gap-[1rem] pt-[4rem] vsm:pt-[8rem] pb-[2rem] vsm:pb-[3.5rem] md:pb-[5rem]">
+        <SectionHeading heading="Register" />
         <Form
           method="post"
-          className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#bbdafa] text-[#0B0019] font-semibold font-primary"
+          className="w-[90%] vsm:w-[75%] gsm:w-[65%] max-w-md mx-auto px-[1.5rem] vsm:px-[2rem] md:px-[3rem] py-[1.5rem] md:py-[2rem] shadow-md rounded-[1rem] bg-[#bbdafa] text-[#0B0019] font-semibold font-primary"
         >
-          <label className="block mb-2 text-[1.5rem]" htmlFor="name">
-            Name
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="text"
-            name="name"
-            id="name"
-          />
-
-          <label className="block mb-2 text-[1.5rem]" htmlFor="email">
-            Email
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="email"
-            name="email"
-            id="email"
-          />
-
-          <label className="block mb-2 text-[1.5rem]" htmlFor="phoneNo">
-            Phone Number
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="tel"
-            name="phoneNo"
-            id="phoneNo"
-          />
-
-          <label className="block mb-2 text-[1.5rem]" htmlFor="location">
-            Location
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="text"
-            name="location"
-            id="location"
-          />
-
-          <label className="block mb-2 text-[1.5rem]" htmlFor="password">
-            Password
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="password"
+          <Label htmlFor={"name"} text="Name" />
+          <Input required={true} type={"text"} name="name" id="name" />
+          <Label htmlFor={"email"} text="Email" />
+          <Input required={true} type={"email"} name="email" id="email" />
+          <Label htmlFor={"phoneNo"} text="Phone Number" />
+          <Input required={true} type={"tel"} name="phoneNo" id="phoneNo" />
+          <Label htmlFor={"location"} text="Location" />
+          <Input required={true} type={"text"} name="location" id="location" />
+          <Label htmlFor={"password"} text="Password" />
+          <Input
+            required={true}
+            type={"password"}
             name="password"
             id="password"
           />
-
-          <label className="block mb-2 text-[1.5rem]" htmlFor="confirmPassword">
-            Confirm Password
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 border border-gray-300 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="password"
+          <Label htmlFor={"confirmPassword"} text="Confirm Password" />
+          <Input
+            type={"password"}
             name="confirmPassword"
             id="confirmPassword"
           />
           <button
             type="submit"
-            className="w-full p-2 bg-[#f8aa26] text-[#080909] text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
+            className="w-full py-2 mt-4 md:mt-0 md:p-2 bg-[#f8aa26] text-[#080909] text-[1.1rem] md:text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
           >
             Register
           </button>
