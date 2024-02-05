@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import DarkButton from "./pets/DarkButton";
-import { adoptPet } from "../utils/adoptPetHandler";
+import DarkButton from "../pets/DarkButton";
+import { adoptPet } from "../../utils/adoptPetHandler";
 
 const PetBioCard = ({
   petDetails,
@@ -17,8 +17,8 @@ const PetBioCard = ({
   };
 
   return (
-    <div className="rounded-[3rem] bg-[#F8AA26] relative pb-[0.5rem] pr-[0.5rem] mb-[1rem]">
-      <div className="py-[1.5rem] px-[2rem] rounded-[3rem] bg-[#EEF3FF] border-t-2 border-l-2 border-[#0B0019] flex flex-col gap-[1rem] items-center">
+    <div className="w-[90%] vsm:w-[80%] gsm:w-[70%] msm:w-[60%] md:max-w-[50%] mmd:w-[40%] lg:w-[35%] rounded-[3rem] bg-[#F8AA26] relative pb-[0.5rem] pr-[0.5rem] mb-[1rem]">
+      <div className="py-[1.5rem] px-[1rem] gsm:px-[2rem] rounded-[3rem] bg-[#EEF3FF] border-t-2 border-l-2 border-[#0B0019] flex flex-col gap-[1rem] items-center">
         <div className="rounded-[50%] w-[6rem] h-[6rem] overflow-hidden rounded-[50%] border-2 border-[#0B0019]">
           <img
             src={petDetails?.profile?.url}
@@ -38,7 +38,7 @@ const PetBioCard = ({
               {`${petDetails.petType}, ${petDetails.petBreed}`}
             </h3>
             {availableForBorrow && (
-              <h3 className="breed text-[1.2rem] opacity-[0.8]">
+              <h3 className="breed text-[1rem] vsm:text-[1.2rem] opacity-[0.8]">
                 {`${petDetails.startDate
                   .slice(0, 10)
                   .split("-")
