@@ -42,7 +42,7 @@ export default function Navbar() {
             {isLoggedIn ? (
               <>
                 <NavLink to="/profile">Profile</NavLink>
-                <button
+                <a
                   onClick={() => {
                     toast.success("Logout Successful!");
                     logout();
@@ -52,12 +52,12 @@ export default function Navbar() {
                   className="uppercase"
                 >
                   Logout
-                </button>
+                </a>
               </>
             ) : (
               <>
                 <NavLink to="/register">Register</NavLink>
-                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/login" className={"text-right"}>Login</NavLink>
               </>
             )}
           </div>

@@ -28,13 +28,13 @@ const PetBioCard = ({
         </div>
         <div className="petDetails flex gap-[2rem] items-center">
           <div className="details text-[#0B0019] font-primary flex flex-col items-center">
-            <h1 className="petName uppercase font-bold text-[2.5rem] leading-[2.5rem]">
+            <h1 className="petName uppercase font-bold text-[1.5rem] vsm:text-[2rem] msm:text-[2.3rem] md:text-[2.5rem] leading-[2.5rem]">
               {petDetails.petName}
             </h1>
-            <h2 className="dateRange font-semibold text-[1.5rem] opacity-[0.8]">
+            <h2 className="dateRange font-semibold text-[1.1rem] vsm:text-[1.5rem] opacity-[0.8]">
               {`${petDetails.petAge} Years, ${petDetails.petGender}`}
             </h2>
-            <h3 className="dateRange font-semibold text-[1.3rem] opacity-[0.7]">
+            <h3 className="dateRange font-semibold text-[1rem] vsm:text-[1.3rem] opacity-[0.7]">
               {`${petDetails.petType}, ${petDetails.petBreed}`}
             </h3>
             {availableForBorrow && (
