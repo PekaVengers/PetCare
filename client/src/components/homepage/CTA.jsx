@@ -6,7 +6,7 @@ const CTA = () => {
   return (
     <div className="w-full flex flex-col md:flex-row font-primary">
       <div className="left w-full md:w-[50%] bg-[#DFE8FD] flex flex-col justify-center items-center gap-[1rem] md:gap-[2rem] border-b-2 md:border-r-2 md:border-b-0 border-black py-[2rem] md:py-[3rem]">
-        <h1 className="vsm:w-[70%] msm:w-[60%] font-medium text-center text-[1.5rem] vsm:text-[2rem] gsm:text-[2.5rem] md:text-[2.5rem]">
+        <h1 className="w-[90%] vsm:w-[70%] msm:w-[60%] font-medium text-center text-[1.5rem] vsm:text-[2rem] gsm:text-[2.5rem] md:text-[2.5rem]">
           Want to adopt a pet today?
           <br />
           Go Ahead!
@@ -17,7 +17,7 @@ const CTA = () => {
       </div>
 
       <div className="right w-full md:w-[50%] bg-[#F8AA26] flex flex-col justify-center items-center gap-[1rem] md:gap-[2rem] border-black py-[2rem] md:py-[3rem]">
-        <h1 className="vsm:w-[70%] msm:w-[60%] font-medium text-center text-[1.5rem] vsm:text-[2rem] gsm:text-[2.5rem] md:text-[2.5rem]">
+        <h1 className="w-[90%] vsm:w-[70%] msm:w-[60%] font-medium text-center text-[1.5rem] vsm:text-[2rem] gsm:text-[2.5rem] md:text-[2.5rem]">
           Want to lend a pet today?
           <br />
           Go Ahead!
