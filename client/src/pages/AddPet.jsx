@@ -194,7 +194,7 @@ export default function AddPet() {
             onSubmit={handleNextButtonSubmit}
             id="formOne"
             // encType="multipart/form-data"
-            className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#15022DCC] text-[#0B0019] font-semibold font-primary"
+            className="w-[90%] vsm:w-[85%] max-w-md mx-auto px-[1rem] gsm:px-[1.5rem] msm:px-[2rem] md:px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#15022DCC] text-[#0B0019] font-semibold font-primary"
           >
             <input
               required
@@ -313,7 +313,7 @@ export default function AddPet() {
           <form
             id="formTwo"
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#15022DCC] text-[#0B0019] font-semibold font-primary"
+            className="w-[95%] vsm:w-[85%] max-w-md mx-auto px-[1rem] gsm:px-[1.5rem] msm:px-[2rem] md:px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#15022DCC] text-[#0B0019] font-semibold font-primary"
           >
             <div>
               <input
@@ -331,32 +331,26 @@ export default function AddPet() {
 
             <div>
               <textarea
-                className="bg-[#fefefe] outline-none rounded-md p-2 mb-2"
+                className="w-full bg-[#fefefe] outline-none rounded-md p-2 mb-2"
                 placeholder="Precautions"
                 required
                 name="petPrecautions"
-                cols="34"
-                rows="2"
               ></textarea>
             </div>
 
             <div>
               <textarea
-                className="bg-[#fefefe] outline-none rounded-md p-2 mb-2"
+                className="w-full bg-[#fefefe] outline-none rounded-md p-2 mb-2"
                 placeholder="Interests [Optional]"
                 name="interests"
-                cols="34"
-                rows="2"
               ></textarea>
             </div>
 
             <div>
               <textarea
-                className="bg-[#fefefe] outline-none rounded-md p-2 mb-2"
+                className="w-full bg-[#fefefe] outline-none rounded-md p-2 mb-2"
                 placeholder="Owner's Message [Optional]"
                 name="ownerMessage"
-                cols="34"
-                rows="2"
               ></textarea>
             </div>
 
