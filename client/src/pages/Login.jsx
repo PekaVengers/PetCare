@@ -3,6 +3,8 @@ import { BASE_URL } from "../utils/BASE_URL";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import Label from "../components/register/Label";
+import Input from "../components/register/Input";
 import useOnline from "../hooks/useOnline";
 import Offline from "../components/Offline";
 
@@ -57,35 +59,19 @@ export default function Login() {
     <>
       <ToastContainer position="top-center" />
       <div className="w-full h-screen bg-[#FEFFC0] flex flex-col justify-center items-center">
-        <SectionHeading heading="Login" styles="text-[4rem]" />
+        <SectionHeading heading="Login"/>
         <form
           method="POST"
-          className="max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#f8aa26] text-[#0B0019] font-semibold font-primary"
+          className="w-[90%] vsm:w-[75%] gsm:w-[65%] max-w-md mx-auto px-[3rem] py-[2rem] shadow-md rounded-[1rem] bg-[#f8aa26] text-[#0B0019] font-semibold font-primary"
         >
-          <label className="block mb-2 text-[1.5rem]" htmlFor="email">
-            Email
-          </label>
-          <input
-            required
-            className="mb-4 w-full p-2 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="email"
-            name="email"
-            id="email"
-          />
-          <label className="block mb-2 text-[1.5rem]" htmlFor="password">
-            Password
-          </label>
-          <input
-            required
-            className="mb-8 w-full p-2 rounded-md outline-none bg-[#0B0019] text-[#EEF3FF]"
-            type="password"
-            name="password"
-            id="password"
-          />
+          <Label htmlFor={"email"} text={"Email"} />
+          <Input required={true} type={"email"} name={"email"} id={"email"} />
+          <Label htmlFor={"password"} text={"Password"} />
+          <Input required={true} type={"password"} name={"password"} id={"password"} />
           <button
             type="submit"
             onClick={handleLoginSubmit}
-            className="w-full p-2 bg-[#bbdafa] text-[#080909] text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
+            className="w-full p-2 bg-[#bbdafa] text-[#080909] text-[1.2rem] md:text-[1.5rem] rounded-md hover:text-[#FEFFC0] hover:bg-[#0B0019] uppercase font-semibold"
           >
             Login
           </button>

@@ -16,7 +16,7 @@ export default {
       screens: {
         '4xl': '1801px',
         '3xl': '1751px',
-        'mmd': '851px',
+        'mmd': '901px',
         'msm': '631px',
         'gsm': '531px',
         'buttonsm': '441px',

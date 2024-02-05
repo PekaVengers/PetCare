@@ -50,13 +50,13 @@ export default function PetsList() {
   return (
     <>
       <div className="bg-[#FEFFC0] w-full min-h-screen flex flex-col justify-center items-center">
-        <SectionHeading heading="Pets" styles="mt-[10rem] mb-[2rem]" />
+        <SectionHeading heading="Pets" styles="mt-[6rem] vsm:mt-[10rem] mb-[1rem] gsm:mb-[1.5rem]" />
         {isLoggedIn && (
           <Link to="/add-pet">
             <DarkButton buttonText="Add your pet" />
           </Link>
         )}
-        <div className="pets mt-[5rem] mb-[3rem] max-w-[90%] flex flex-wrap gap-x-[3rem] gap-y-[2rem] items-stretch justify-center">
+        <div className="pets mt-[2rem] gsm:mt-[3rem] md:mt-[4rem] mb-[3rem] max-w-[90%] flex flex-wrap gap-x-[3rem] gap-y-[2rem] items-stretch justify-center">
           {pets.map(
             ({
               _id,

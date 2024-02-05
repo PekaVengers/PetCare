@@ -17,9 +17,9 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`md:bg-transparent p-2 vsm:p-4 font-primary uppercase absolute top-0 w-full z-10 ${menuOpen?"bg-[#F8AA26]":"bg-transparent"}`}>
+      <nav className={`md:bg-transparent px-2 pt-4 vsm:p-4 font-primary uppercase absolute top-0 w-full z-10 ${menuOpen?"bg-[#F8AA26]":"bg-transparent"}`}>
         <div className="container min-w-[98%] flex flex-col justify-around items-center md:flex-row md:text-[1.3rem] md:justify-between text-[#080909] font-semibold mx-auto ease-in duration-300 md:px-4">
-          <div className="logoIconContainer flex w-full justify-between items-center">
+          <div className="logoIconContainer flex w-full md:w-fit justify-between items-center">
             <NavLink to="/" className="text-[1.5rem] font-semibold">
               <img
                 src={logo}
