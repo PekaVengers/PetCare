@@ -6,12 +6,10 @@ const useOnline = () => {
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
-      console.log("You are online: ", isOnline);
     };
 
     const handleOffline = () => {
       setIsOnline(false);
-      console.log("You are online: ", isOnline);
     };
 
     window.addEventListener("online", handleOnline);
