@@ -43,7 +43,7 @@ export async function action({ request }) {
       }
       console.log("Register response:", data);
     } catch (error) {
-      console.error("Error during register request:", error);
+      toast.error(error);
     }
   }
   return null;
@@ -92,7 +92,7 @@ export default function Register() {
           </button>
         </Form>
       </div>
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" closeOnClick={true} closeButton={true}/>
     </>
   );
 }
