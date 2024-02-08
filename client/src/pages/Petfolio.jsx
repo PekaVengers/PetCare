@@ -45,7 +45,7 @@ export default function Petfolio() {
               setLoader={setLoader}
             />
             <h2 className="p-2 px-[0.7rem] gsm:px-4 rounded-[1rem] text-[1.2rem] vsm:text-[1.5rem] gsm:text-[1.7rem] font-primary text-[#EAA124] bg-[#0B0019] overflow-auto max-w-[90%] flex flex-col md:flex-row items-center vsm:mt-4">
-              <strong className="font-semibold uppercase text-[#EEF3FF]">
+              <strong className="font-semibold uppercase text-[#EEF3FF] mr-1">
                 {"Precautions: "}
               </strong>
               <span className="text-center md:text-left">
